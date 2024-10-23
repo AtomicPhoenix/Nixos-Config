@@ -93,7 +93,6 @@
       # Hyprland
       waybar
       hyprcursor
-      hyprlock
       # hypridle
       hyprpaper
 
