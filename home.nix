@@ -76,6 +76,7 @@
     userName = "PossiblyAI";
     userEmail = "imrana50280@gmail.com";
     extraConfig = {
+      push.autoSetupRemote = true;
       init.defaultBranch = "main";
     };
   };
