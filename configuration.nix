@@ -54,6 +54,9 @@
 
   # Limit the number of generations to keep
   boot.loader.systemd-boot.configurationLimit = 10;
+  
+  # remove nix-channel related tools & configs, we use flakes instead.
+  nix.channel.enable = false; 
 
   # Perform garbage collection weekly to maintain low disk usage
   nix.gc = {
@@ -113,7 +116,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-   neovim
    alacritty
    firefox
    git
@@ -150,11 +152,13 @@
 	
   fonts.packages = with pkgs; [
    font-awesome
+
   ];
 hardware.sensor.iio.enable = true;
 hardware.bluetooth.enable = true;
 hardware.bluetooth.powerOnBoot = true;
 environment.variables.XCURSOR_SIZE = "32";
+environment.variables.EDITOR = "nvim";
 
 systemd.services.dlm.wantedBy = [ "multi-user.target" ];
 services.hardware.bolt.enable = true;
