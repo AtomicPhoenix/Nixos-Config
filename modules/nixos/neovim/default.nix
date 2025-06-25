@@ -1,13 +1,30 @@
-{lib, ...}: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib.generators) mkLuaInline;
 in {
   programs.nvf = {
-    # using the neovim-nightly overlay
-    # vim.package = pkgs.neovim-unwrapped;
     enable = true;
     # enableManpages = true;
     settings = {
       vim = {
+        lazy.plugins = {
+          "vim-tmux-navigator" = {
+            package = pkgs.vimPlugins.vim-tmux-navigator;
+
+            cmd = [
+              "TmuxNavigateLeft"
+              "TmuxNavigateDown"
+              "TmuxNavigateUp"
+              "TmuxNavigateRight"
+              "TmuxNavigatePrevious"
+              "TmuxNavigatorProcessList"
+            ];
+          };
+        };
+
         globals.mapleader = " ";
         globals.maplocalleader = " ";
         clipboard.providers.wl-copy.enable = true;
@@ -214,13 +231,42 @@ in {
         };
 
         keymaps = [
-          # Clears highlights on search when pressing <Esc> in normal mode
-          # See `:help hlsearch`
+          {
+            key = "<c-h>";
+            mode = "n";
+            action = "<cmd><C-U>TmuxNavigateLeft<cr>";
+            desc = "Navigate left a pane";
+          }
+          {
+            key = "<c-j>";
+            mode = "n";
+            action = "<cmd><C-U>TmuxNavigateDown<cr>";
+            desc = "Navigate down a pane";
+          }
+          {
+            key = "<c-k>";
+            mode = "n";
+            action = "<cmd><C-U>TmuxNavigateUp<cr>";
+            desc = "Navigate up a pane";
+          }
+          {
+            key = "<c-l>";
+            mode = "n";
+            action = "<cmd><C-U>TmuxNavigateRight<cr>";
+            desc = "Navigate right a pane";
+          }
+          {
+            key = "<c-\\>";
+            mode = "n";
+            action = "<cmd><C-U>TmuxNavigatePrevious<cr>";
+            desc = "Navigate to the previous pane";
+          }
           {
             key = "<Esc>";
             mode = "n";
             silent = true;
             action = "<cmd>nohlsearch<CR>";
+            desc = "Clears highlights on search when pressing <Esc> in normal mode";
           }
           {
             key = "<leader>q";
@@ -293,36 +339,18 @@ in {
   # ui.icons = vim.g.have_nerd_font and {} or {}
   # Disable Arrow Keys
   # Bash Language Server Auto start????
-
-  # config.vim.lazy.plugins = {
-  #   # "aerial.nvim" = {
-  #   #   package = pkgs.vimPlugins.aerial-nvim;
-  #   #   setupModule = "aerial";
-  #   #   setupOpts = {
-  #   #     option_name = true;
-  #   #   };
-  #   #   after = ''
-  #   #     # custom lua code to run after plugin is loaded
-  #   #     print('aerial loaded')
-  #   #   '';
-
-  #   #   # Explicitly mark plugin as lazy. You don't need this if you define one of
-  #   #   # the trigger "events" below
-  #   #   lazy = true;
-
-  #   #   # load on command
-  #   #   cmd = ["AerialOpen"];
-
-  #   #   # load on event
-  #   #   event = ["BufEnter"];
-
-  #   #   # load on keymap
-  #   #   keys = [
-  #   #     {
-  #   #       key = "<leader>a";
-  #   #       action = ":AerialToggle<CR>";
-  #   #     }
-  #   #   ];
-  #   # };
-  # };
 }
+# {
+#   lib,
+#   self,
+#   inputs,
+#   ...
+# }: {
+#   keymaps = import ./keymaps.nix {inherit lib self;};
+#   languages = import ./languages.nix {inherit lib;};
+#   style = import ./style.nix {inherit lib;};
+#   options = import ./options.nix {inherit lib;};
+#   plugins = import ./plugins.nix {inherit lib;};
+#   neovimConfiguration = import ../modules {inherit self inputs lib;};
+# }
+

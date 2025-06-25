@@ -6,7 +6,7 @@
 
   programs.git = {
     enable = true;
-    userName = "PossiblyAI";
+    userName = "Possiblyai";
     userEmail = "imrana50280@gmail.com";
     extraConfig = {
       push.autoSetupRemote = true;
