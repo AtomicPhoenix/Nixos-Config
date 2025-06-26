@@ -6,9 +6,11 @@
     '';
 
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10; # Limit the number of generations to keep
+      };
       efi.canTouchEfiVariables = true;
-      systemd-boot.configurationLimit = 10; # Limit the number of generations to keep
     };
 
     # Use latest kernel.
