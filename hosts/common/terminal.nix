@@ -3,6 +3,7 @@
     font-awesome
     nerd-fonts.departure-mono
     nerd-fonts.symbols-only
+    nerd-fonts.fira-code
   ];
 
   environment.variables = {

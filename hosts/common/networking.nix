@@ -2,6 +2,7 @@
   networking = {
     # Enable firewall
     firewall = {
+      checkReversePath = false;
       enable = true;
       allowedTCPPorts = [80];
     };

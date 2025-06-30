@@ -11,7 +11,7 @@
       };
       font = {
         normal = {
-          family = "Liberation Mono";
+          family = "FiraCode Nerd Font Mono";
           style = "Regular";
         };
         size = 12;
