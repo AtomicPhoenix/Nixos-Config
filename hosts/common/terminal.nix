@@ -5,8 +5,11 @@
     nerd-fonts.symbols-only
   ];
 
-  environment.variables = {
-    XCURSOR_SIZE = "32";
-    EDITOR = "nvim";
+  environment = {
+    sessionVariables.NIXOS_OZONE_WL = "1";
+    variables = {
+      XCURSOR_SIZE = "32";
+      EDITOR = "nvim";
+    };
   };
 }
