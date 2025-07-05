@@ -7,6 +7,21 @@
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin"
       eval "$(direnv hook bash)"
+
+      function rebuild()  {
+        RED='\033[0;31m'
+        NOCOLOR='\033[0m' # No Color
+        if [[ -z $host ]]; then
+          host="$HOSTNAME"
+          printf "\033[0;31mERROR: \033[0mNo hostname specified. Defaulting to using hostname (%s) for flake...\n" "$HOSTNAME"
+        else
+          host="$1"
+          printf "Using flake %s...\n" "$host"
+        fi
+        printf "System will be rebuilt using the selected flake (%s)\n" "$host"
+        printf " Rebuilding...\n\n"
+        sudo nixos-rebuild switch --show-trace --flake ~/nixos-config/#$host
+      }
     '';
 
     shellAliases = {

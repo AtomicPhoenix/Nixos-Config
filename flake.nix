@@ -3,18 +3,26 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+
+    # sops-nix: Secret provisioning for NixOS based on sops
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Hyrland
     hyprland.url = "github:hyprwm/Hyprland";
-    # Simple system to use Neovim configurations in Nix
+
+    # Neovim configuration system for Nix
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # home-manager, used for managing user configuration
+
+    # Home-Manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      # Inherits `inputs.nixpkgs` of current flake
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs"; # Inherits `inputs.nixpkgs` of current flake
     };
   };
 
@@ -22,9 +30,10 @@
     nixpkgs,
     home-manager,
     nvf,
+    sops-nix,
     ...
   } @ inputs: let
-    getConfig = hostname:
+    mkNixosConfiguration = hostname:
       nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;}; # Let submodules access inputs
         system = "x86_64-linux";
@@ -35,8 +44,9 @@
           ./modules/nixos
 
           nvf.nixosModules.default
+          sops-nix.nixosModules.sops
 
-          # Home-Manager; Deploys automatically on rebuild
+          # Home-Manager deploys automatically on rebuild
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -51,8 +61,8 @@
       };
   in {
     nixosConfigurations = {
-      ai-desk = getConfig "ai-desk";
-      ai-duo = getConfig "ai-duo";
+      ai-desk = mkNixosConfiguration "ai-desk";
+      ai-duo = mkNixosConfiguration "ai-duo";
     };
   };
 }
