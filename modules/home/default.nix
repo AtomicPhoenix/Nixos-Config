@@ -8,6 +8,9 @@
     ./alacritty.nix
     ./bash.nix
     ./tmux.nix
+    ./mpv.nix
+    ./proton.nix
+    ./wayland.nix
     # ./nvf.nix
   ];
 

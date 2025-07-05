@@ -148,6 +148,7 @@ in {
           nix = enableLanguage // {extraDiagnostics.enable = true;};
           java = enableLanguage;
           lua = enableLanguage;
+          python = enableLanguage;
         };
         # "folke/which-key.nvim"r# Shows pending keybinds
         binds.whichKey = {
