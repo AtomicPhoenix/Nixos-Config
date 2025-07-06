@@ -44,8 +44,7 @@
     direnv # direnv
 
     # File Browsers
-    firefox
-    chromium
+    # firefox
 
     # Git/Github
     git # Git

@@ -11,6 +11,7 @@
     variables = {
       XCURSOR_SIZE = "32";
       EDITOR = "nvim";
+      BROWSER = "firefox";
     };
   };
 }
