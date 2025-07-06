@@ -149,6 +149,13 @@ in {
           java = enableLanguage;
           lua = enableLanguage;
           python = enableLanguage;
+          markdown = {
+            enable = true;
+            lsp.enable = true;
+            extensions.render-markdown-nvim = {
+              enable = true;
+            };
+          };
         };
         # "folke/which-key.nvim"r# Shows pending keybinds
         binds.whichKey = {

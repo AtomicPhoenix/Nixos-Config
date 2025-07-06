@@ -7,9 +7,11 @@
     ./git.nix
     ./alacritty.nix
     ./bash.nix
+    ./nix-direnv.nix
     ./tmux.nix
     ./mpv.nix
     ./proton.nix
+    ./hyprland.nix
     ./wayland.nix
     # ./nvf.nix
   ];
