@@ -1,9 +1,12 @@
 {...}: {
   imports = [
+    ./audio.nix
     ./boot.nix
     ./hardware.nix
+    ./keyd.nix
     ./networking.nix
     ./nix-settings.nix
+    ./openssh.nix
     ./packages.nix
     ./services.nix
     ./systemd.nix
@@ -18,11 +21,6 @@
       isNormalUser = true;
       description = "ai";
       extraGroups = ["networkmanager" "wheel"];
-      # packages = with pkgs; [];
     };
-    # guest = {
-    #   isNormalUser = true;
-    #   description = "Guest user";
-    # };
   };
 }
