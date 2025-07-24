@@ -8,7 +8,6 @@
     ./nix-settings.nix
     ./openssh.nix
     ./packages.nix
-    ./services.nix
     ./systemd.nix
     ./terminal.nix
     ./time-and-locale.nix

@@ -4,7 +4,7 @@ _: {
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
-        identityFile = "~/.ssh/ai-primary-key";
+        identityFile = ["~/.ssh/ai-desk-key" "~/.ssh/ai-duo-key"];
       };
     };
   };
