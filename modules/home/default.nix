@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./git.nix
+    ./ssh.nix
     ./alacritty.nix
     ./bash.nix
     ./nix-direnv.nix
