@@ -20,7 +20,7 @@
         fi
         printf "System will be rebuilt using the selected flake (%s)\n" "$host"
         printf " Rebuilding...\n\n"
-        sudo nixos-rebuild switch --show-trace --flake ~/nixos-config/#$host
+        sudo nixos-rebuild switch --show-trace --flake ~/Nixos-Config/#$host
       }
     '';
 
