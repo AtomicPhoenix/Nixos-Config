@@ -40,21 +40,20 @@
         modules = [
           # Device configuration file
           ./hosts/${hostname}
-          # Global Modules
-          ./modules/nixos
 
+          # NixOS Modules
           nvf.nixosModules.default
           sops-nix.nixosModules.sops
+          # NIXOS Modules Configuration
+          ./modules/nixos
 
-          # Home-Manager deploys automatically on rebuild
+          # Home-Manager Module
           home-manager.nixosModules.home-manager
           {
             home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.ai = import ./modules/home;
-              extraSpecialArgs = inputs;
-              # Can use extraSpecialArgs to pass arguments to home.nix
+              useGlobalPkgs = true; # Use nixos's pkgs value
+              extraSpecialArgs = inputs; # Pass arguments to home modules
+              users.ai.imports = [./modules/home/ai-desk.nix];
             };
           }
         ];
