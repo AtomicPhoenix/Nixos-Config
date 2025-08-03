@@ -10,19 +10,6 @@
 
 
       function rebuild()  {
-        # Quick check to make sure our filesystem exists incase I'm modifying partitions again
-        UUID=$(sudo blkid | grep "LABEL=\"root"\" | cut -d' ' -f 3 | cut -d'"' -f 2)
-        ROOT_FOUND=$(grep -c $UUID ~/nixos-config/hosts/ai-duo/hardware-configuration.nix)
-
-        if [[ $ROOT_FOUND -eq 0 ]]; then
-          printf "\033[0;31mERROR: \033[0mUUID of root filesystem not found in ~/nixos-config/hosts/%s/hardware-configuration.nix. Rebuilding can cause filesystem issues.\nEnter 'y' to continue, anything else to quit." "$HOSTNAME"
-          read continue
-          if [[ "$continue" != 'y' ]]; then
-            return
-          fi
-          echo "Continuing..."
-        fi
-
         # Get hostname and rebuild
         if [[ -z $host ]]; then
           host="$HOSTNAME"
