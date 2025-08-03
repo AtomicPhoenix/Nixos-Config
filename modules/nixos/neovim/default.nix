@@ -10,6 +10,8 @@ in {
     # enableManpages = true;
     settings = {
       vim = {
+        viAlias = true;
+        vimAlias = true;
         lazy.plugins = {
           "vim-tmux-navigator" = {
             package = pkgs.vimPlugins.vim-tmux-navigator;
@@ -133,8 +135,6 @@ in {
           italic = true;
         };
 
-        viAlias = false;
-        vimAlias = true;
         lsp.enable = true;
         languages = let
           enableLanguage = {
