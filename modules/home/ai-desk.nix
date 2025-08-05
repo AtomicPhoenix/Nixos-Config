@@ -10,6 +10,12 @@
         hostname = "github.com";
         identityFile = ["~/.ssh/ai-desk-key"];
       };
+
+      "ai-duo" = {
+        hostname = "ai-duo";
+        identityFile = ["~/.ssh/ai-desk-personal"];
+        port = 8102;
+      };
     };
   };
 }
