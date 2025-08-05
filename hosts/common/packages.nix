@@ -90,6 +90,7 @@
     hypridle
     hyprlock
     hyprpaper
+    inotify-tools
 
     # Display Management
     nwg-displays
