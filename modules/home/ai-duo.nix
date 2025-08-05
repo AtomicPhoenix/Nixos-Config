@@ -19,5 +19,5 @@
     };
   };
 
-  wayland.windowManager.hyprland.settings.exec-once = ["~/Documents/Scripts/duo-manage-monitors.sh"];
+  wayland.windowManager.hyprland.settings.exec-once = ["duo-manage-monitors"];
 }

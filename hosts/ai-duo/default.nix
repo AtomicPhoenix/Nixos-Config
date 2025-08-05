@@ -29,10 +29,14 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    inotify-tools
-    usbutils
-  ];
+  environment.systemPackages = let
+    duo-manage-monitors = pkgs.writeShellScriptBin "duo-manage-monitors" ./scripts/duo-manage-monitors.sh;
+  in
+    with pkgs; [
+      inotify-tools
+      usbutils
+      duo-manage-monitors
+    ];
 
   users.users.ai.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGdhbEfOlA2Q4y1OHY4MdFOkcQpuZzJKaPxqFFsyngHM ai@ai-desk"
