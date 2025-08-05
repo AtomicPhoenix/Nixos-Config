@@ -19,7 +19,11 @@
       home = "/home/ai";
       isNormalUser = true;
       description = "ai";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "docker"];
     };
+  };
+
+  virtualisation.docker = {
+    enable = true;
   };
 }

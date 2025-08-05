@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   imports = [
     ./git.nix
     ./alacritty.nix
@@ -14,7 +10,6 @@
     ./proton.nix
     ./hyprland.nix
     ./wayland.nix
-    # ./nvf.nix
   ];
 
   /**
@@ -44,5 +39,15 @@
     username = "ai";
     homeDirectory = lib.mkForce "/home/ai";
     stateVersion = "25.05";
+  };
+
+  programs.ssh = {
+    enable = true;
+    matchBlocks = {
+      "github.com" = {
+        hostname = "github.com";
+        identityFile = ["~/.ssh/ai-desk-key"];
+      };
+    };
   };
 }

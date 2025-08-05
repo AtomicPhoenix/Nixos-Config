@@ -27,6 +27,8 @@
         "mako &"
         "waybar"
         "hyprpaper"
+        "clickup"
+        "discord"
         "sudo btmgmt le on"
       ];
 
@@ -174,8 +176,8 @@
         "$mainMod CTRL, O, exec, (hyprctl dispatch focuswindow class:obsidian | grep ok)  || (notify-send -i $obsidianIcon 'Starting Obsidian' && obsidian $useWayland)"
 
         # Screenshots
-        "$mainMod SHIFT, S, exec, grim -g \"$(slurp -d)\" - | wl-copy; notify-send 'Image copied to clipboard'"
-        "$mainMod ALT, S, exec, grim -g \"$(slurp -d)\"; notify-send 'Image saved to ~/Pictures/'"
+        "$mainMod SHIFT, S, exec, grim -g \"$(slurp -d -w 0)\" - | wl-copy; notify-send 'Image copied to clipboard'"
+        "$mainMod ALT, S, exec, grim -g \"$(slurp -d -w 0)\"; notify-send 'Image saved to ~/Pictures/'"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
@@ -304,14 +306,25 @@
         # windowrule = float,class:^(kitty)$,title:^(kitty)$
         "pin,class:mpv"
         "size 40% 40%,class:mpv"
+        "opacity 1.0 override 1.0 override 1.0 override, class:mpv"
+
         "float,class:mpv"
         "pin,class:firefox,initialTitle:^Picture.*$ "
         "size 40% 40%,class:firefox,initialTitle:^Picture.*$ "
         "float,class:firefox,initialTitle:^Picture.*$ "
+
         "workspace 11, initialTitle:^(Discord)(.*)$"
+        "monitor 1, initialTitle:^(Discord)(.*)$"
+
         "workspace 12, initialTitle:^(Spotify)(.*)$"
+        "monitor 1, initialTitle:^(Spotify)(.*)$"
+
         "workspace 13, initialTitle:^(ClickUp)(.*)$"
+        "monitor 1, initialTitle:^(ClickUp)(.*)$"
+
         "workspace 14, class:obsidian"
+        "monitor 1, class:obsidian"
+
         "suppressevent maximize, class:.* # You'll probably like this."
       ];
     };
