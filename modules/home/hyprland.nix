@@ -12,6 +12,10 @@
     systemd.enable = true;
 
     settings = {
+      monitor = [
+        "eDP-1, 2880x1800@120.0Hz, 0x0, 2"
+        "eDP-2, 2880x1800@120.0Hz, 0x900, 2"
+      ];
       "$terminal" = "alacritty";
       "$fileManager" = "thunar";
       "$menu" = "rofi -show combi";
@@ -56,7 +60,7 @@
 
         # Change transparency of focused and unfocused windows
         active_opacity = 1.0;
-        inactive_opacity = 0.9;
+        inactive_opacity = 1.0;
         #drop_shadow = true
         #shadow_range = 4
         #shadow_render_power = 3
