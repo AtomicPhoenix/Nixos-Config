@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   imports = [
     ./git.nix
     ./alacritty.nix
@@ -14,7 +10,6 @@
     ./proton.nix
     ./hyprland.nix
     ./wayland.nix
-    # ./nvf.nix
   ];
 
   /**
