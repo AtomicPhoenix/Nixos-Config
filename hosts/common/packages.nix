@@ -33,7 +33,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    qbittorrent
     protonvpn-gui
     rofi # Window switcher, run dialog, ssh-launcher and dmenu replacement
 
@@ -90,7 +89,6 @@
     hypridle
     hyprlock
     hyprpaper
-    inotify-tools
 
     # Display Management
     nwg-displays

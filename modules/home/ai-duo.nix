@@ -10,6 +10,14 @@
         hostname = "github.com";
         identityFile = ["~/.ssh/ai-duo-github"];
       };
+
+      "ai-desk" = {
+        hostname = "ai-desk";
+        identityFile = ["~/.ssh/ai-duo-personal"];
+        port = 8102;
+      };
     };
   };
+
+  wayland.windowManager.hyprland.settings.exec-once = ["~/Documents/Scripts/duo-manage-monitors.sh"];
 }

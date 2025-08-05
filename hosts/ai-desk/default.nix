@@ -31,6 +31,11 @@
       };
     };
   };
+
+  users.users.ai.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHMD7R3C50biFqJaBhIXYQZNCKtsM/e35Oh7b1h6ESSX ai@ai-duo"
+  ];
+
   # NixOS release to use (See man configuration.nix or https://nixos.org/nixos/options.html)
   # This value does not affect the Nixpkgs version your packages and OS are pulled from, so changing it will not upgrade your system.)
   # This value being lower than the current NixOS release does not mean your system is out of date, out of support, or vulnerable.

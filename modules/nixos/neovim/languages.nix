@@ -12,4 +12,5 @@ in {
   lua = enableLanguage;
   python = enableLanguage;
   go = enableLanguage;
+  bash = enableLanguage;
 }
