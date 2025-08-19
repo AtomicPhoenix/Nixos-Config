@@ -8,7 +8,7 @@
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
-        identityFile = ["~/.ssh/ai-desk-key"];
+        identityFile = ["~/.ssh/ai-desk-github"];
       };
 
       "ai-duo" = {
