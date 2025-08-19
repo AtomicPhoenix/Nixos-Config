@@ -13,4 +13,10 @@ in {
   python = enableLanguage;
   go = enableLanguage;
   bash = enableLanguage;
+
+  markdown = {
+    enable = true;
+    lsp.enable = true;
+    extensions.markview-nvim.enable = true;
+  };
 }
