@@ -61,6 +61,7 @@
     # Games
     lutris
     vulkan-tools
+    cemu
 
     # Screenshots
     slurp

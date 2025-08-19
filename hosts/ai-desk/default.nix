@@ -10,6 +10,7 @@
   # Define hostname.
   networking.hostName = "ai-desk";
 
+  boot.initrd.kernelModules = ["amdgpu"];
   boot.loader = lib.mkForce {
     efi = {
       canTouchEfiVariables = true;
