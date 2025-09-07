@@ -30,11 +30,21 @@
   };
 
   environment.systemPackages = let
-    duo-manage-monitors = pkgs.writeShellScriptBin "duo-manage-monitors" ./scripts/duo-manage-monitors.sh;
+    get-kbd-connected = (pkgs.writeScriptBin "get-kbd-connected" ./scripts/get-kbd-connected.sh).overrideAttrs (old: {
+      buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    });
+    toggle-monitor = (pkgs.writeScriptBin "toggle-monitor" ./scripts/toggle-monitor.sh).overrideAttrs (old: {
+      buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    });
+    duo-manage-monitors = (pkgs.writeScriptBin "duo-manage-monitors" ./scripts/duo-manage-monitors.sh).overrideAttrs (old: {
+      buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    });
   in
     with pkgs; [
       inotify-tools
       usbutils
+      get-kbd-connected
+      toggle-monitor
       duo-manage-monitors
     ];
 
