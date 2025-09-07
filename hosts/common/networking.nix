@@ -1,4 +1,5 @@
 {lib, ...}: {
+  services.resolved.enable = true;
   networking = {
     # Enable firewall
     firewall = {
@@ -10,6 +11,7 @@
     # Enable networking
     networkmanager = {
       enable = true;
+      dns = "systemd-resolved";
     };
 
     # Enables DHCP on each ethernet and wireless interface.
