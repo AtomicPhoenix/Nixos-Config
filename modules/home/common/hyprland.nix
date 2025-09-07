@@ -18,7 +18,7 @@
       ];
       "$terminal" = "alacritty";
       "$fileManager" = "thunar";
-      "$menu" = "rofi -show combi";
+      "$menu" = "rofi -show combi || (pkill rofi && rofi -show combi)";
       "$webBrowser" = "firefox";
 
       "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
