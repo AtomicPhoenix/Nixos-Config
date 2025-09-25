@@ -1,10 +1,6 @@
 {pkgs, ...}: {
   # Bootloader.
   boot = {
-    initrd.preDeviceCommands = ''
-      ${pkgs.fortune} | ${pkgs.neo-cowsay} --bold --aurora -f tux
-    '';
-
     loader = {
       systemd-boot = {
         enable = true;
