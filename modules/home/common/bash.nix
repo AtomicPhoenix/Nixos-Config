@@ -25,6 +25,7 @@
     shellAliases = {
       ls = "ls --color=auto";
       grep = "grep --color=auto";
+      unzip = "function _unzip(){ nix run nixpkgs#unzip $1 -- -d ./Unzipped && echo \"Unzipped files to $PWD/Unzipped\"; };_unzip";
     };
   };
 
