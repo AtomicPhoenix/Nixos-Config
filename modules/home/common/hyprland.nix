@@ -18,7 +18,7 @@
       ];
       "$terminal" = "alacritty";
       "$fileManager" = "thunar";
-      "$menu" = "rofi -show combi || (pkill rofi && rofi -show combi)";
+      "$menu" = "rofi -show || (pkill rofi && rofi -show)";
       "$webBrowser" = "firefox";
 
       "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
@@ -27,6 +27,8 @@
         "mako &"
         "waybar"
         "hyprpaper"
+        "hypridle"
+        "wallpaper_autoplay"
         "clickup"
         "discord"
         "sudo btmgmt le on"
@@ -231,6 +233,28 @@
         "$mainMod SHIFT, B, exec,  pkill waybar || waybar"
       ];
 
+      bindel = [
+        # Audio Settings
+        ", XF86AudioLowerVolume, exec, amixer set Master 5%-"
+        ", XF86AudioRaiseVolume, exec, amixer set Master 5%+"
+        ", XF86AudioMute, exec, amixer set Master toggle"
+        " ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+
+        ", F1, exec, amixer set Master toggle"
+        ", F2, exec, amixer set Master 5%-"
+        ", F3, exec, amixer set Master 5%+"
+        ", F7, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+
+        # Brightness Settings
+        " ,XF86MonBrightnessUp, exec, brightnessctl -d intel_backlight s 10%+ && brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)"
+        " ,XF86MonBrightnessDown, exec, brightnessctl -d intel_backlight s 10%- &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)"
+        " ,XF86KbdBrightnessUp, exec, brightnessctl -d asus::kbd_backlight s 1+"
+        " ,XF86KbdBrightnessDown, exec, brightnessctl -d asus::kbd_backlight s 1-"
+
+        " ,F5, exec, brightnessctl -d intel_backlight s 10%-"
+        " ,F6, exec, brightnessctl -d intel_backlight s 10%+"
+      ];
+
       # Repeating Binds
       binde = [
         # Move focus with mainMod + arrow keys
@@ -256,18 +280,6 @@
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
-
-        # Audio Settings
-        ", F1,                   exec, amixer set Master toggle"
-        ", XF86AudioMute,        exec, amixer set Master toggle"
-        ", F2,                   exec, amixer set Master 5%-"
-        ", XF86AudioLowerVolume, exec, amixer set Master 5%-"
-        ", F3,                   exec, amixer set Master 5%+"
-        ", XF86AudioRaiseVolume, exec, amixer set Master 5%+"
-
-        # Brightness Settings
-        ", XF86MonBrightnessUp, exec, increaseBrightness.sh"
-        ", XF86MonBrightnessDown, exec, decreaseBrightness.sh"
 
         # Additional Mouse Buttons
         ", mouse:276, exec, RaiseVolume.sh"
@@ -326,6 +338,42 @@
         "monitor 1, class:obsidian"
 
         "suppressevent maximize, class:.* # You'll probably like this."
+      ];
+    };
+  };
+  services.hypridle = {
+    enable = true;
+    settings = {
+      # General settings for what to do when certain global events / signals occur (e.g. lock_cmd runs when a lock signal is heard)
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock;"; # avoid starting multiple hyprlock instances.
+        unlock_cmd = "pkill hyprlock;";
+        before_sleep_cmd = "hyprlock;";
+        after_sleep_cmd = "hyprctl dispatch dpms on; nmcli radio wifi on; brightnessctl -d intel_backlight s 100% &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)"; # to avoid having to press a key twice to turn on the display.
+        ignore_dbus_inhibit = false; # Don't dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
+        ignore_systemd_inhibit = false; # Don't ignore systemd-inhibit --what=idle inhibitors
+        ignore_wayland_inhibit = false; # Don't ignore wayland protocol inhibition requests (e.g. from running video players)
+      };
+      listener = [
+        {
+          timeout = 120;
+          on-timeout = "brightnessctl -d intel_backlight s 30% &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)";
+          on-resume = "brightnessctl -d intel_backlight s 100% &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)";
+        }
+        {
+          timeout = 240;
+          on-timeout = "loginctl lock-session;";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+        {
+          timeout = 300;
+          on-timeout = "systemd-ac-power || hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
+        }
+        {
+          timeout = 600;
+          on-timeout = "loginctl suspend";
+        }
       ];
     };
   };
