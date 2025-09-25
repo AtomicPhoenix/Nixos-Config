@@ -1,5 +1,9 @@
 # See configuration.nix(5) man page and NixOS Manual (accessible by running ‘nixos-help’).
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -28,6 +32,7 @@
       ];
     };
   };
+  nixpkgs.overlays = [inputs.nix-matlab.overlay];
 
   environment.systemPackages = let
     get-kbd-connected = (pkgs.writeScriptBin "get-kbd-connected" ./scripts/get-kbd-connected.sh).overrideAttrs (old: {
@@ -41,11 +46,13 @@
     });
   in
     with pkgs; [
+      matlab
       inotify-tools
       usbutils
       get-kbd-connected
       toggle-monitor
       duo-manage-monitors
+      brightnessctl
     ];
 
   users.users.ai.openssh.authorizedKeys.keys = [
