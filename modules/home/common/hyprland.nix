@@ -28,7 +28,6 @@
         "waybar"
         "hyprpaper"
         "hypridle"
-        "wallpaper_autoplay"
         "clickup"
         "discord"
         "sudo btmgmt le on"
