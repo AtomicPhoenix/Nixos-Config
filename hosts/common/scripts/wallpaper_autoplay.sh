@@ -1,27 +1,18 @@
 #!/usr/bin/env bash
 
-wallpapers=$(find ~/Pictures/Wallpapers/*)
-wallpaperCount="$(echo "$wallpapers" | wc -w)"
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+CHANGE_INTERNAL=60
 
-function unload() {
-	hyprctl hyprpaper unload "$1" &>/dev/null
-}
+readarray -d '' wallpapers < <(find "$WALLPAPER_DIR" -type f -print0)
 
-function preload() {
-	hyprctl hyprpaper preload "$1" &>/dev/null
-}
-
-function setwp() {
-	hyprctl hyprpaper wallpaper ", $1" &>/dev/null
-}
-
-while :; do
-	for i in $(seq 1 "$wallpaperCount"); do
-		bg="$(echo "$wallpapers" | sed -n "$i"'p')"
-		preload "$bg"
-		sleep 5
-		setwp "$bg"
-		unload "$bg"
-		sleep 55
+while true; do
+	for i in "${!wallpapers[@]}"; do
+		wallpaper="${wallpapers[$i]}"
+		echo "$wallpaper"
 	done
+	RANDOM_WALLPAPER=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
+	hyprctl hyprpaper preload "$RANDOM_WALLPAPER" &>/dev/null
+	hyprctl hyprpaper wallpaper ", $RANDOM_WALLPAPER" &>/dev/null
+	hyprctl hyprpaper unload "$RANDOM_WALLPAPER" &>/dev/null
+	sleep "$CHANGE_INTERNAL"
 done

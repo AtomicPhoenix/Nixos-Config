@@ -32,14 +32,15 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = let
+  environment.systemPackages =
+    # let
     # Rotate through wallpapers
-    wallpaper_autoplay = (pkgs.writeScriptBin "wallpaper_autoplay" ./scripts/wallpaper_autoplay.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
-  in
+    # wallpaper_autoplay = (pkgs.writeScriptBin "wallpaper_autoplay" ./scripts/wallpaper_autoplay.sh).overrideAttrs (old: {
+    #   buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    # });
+    # in
     with pkgs; [
-      wallpaper_autoplay
+      # wallpaper_autoplay
       protonvpn-gui
 
       # SSH protocol implementation
