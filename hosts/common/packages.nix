@@ -32,68 +32,79 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    protonvpn-gui
-    rofi # Window switcher, run dialog, ssh-launcher and dmenu replacement
+  environment.systemPackages =
+    # let
+    # Rotate through wallpapers
+    # wallpaper_autoplay = (pkgs.writeScriptBin "wallpaper_autoplay" ./scripts/wallpaper_autoplay.sh).overrideAttrs (old: {
+    #   buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    # });
+    # in
+    with pkgs; [
+      # wallpaper_autoplay
+      protonvpn-gui
 
-    # SSH protocol implementation
-    openssh
+      # SSH protocol implementation
+      openssh
 
-    # File editor
-    vim
+      # File editor
+      vim
 
-    direnv # direnv
+      direnv # direnv
 
-    # File Browsers
-    # firefox
+      # File Browsers
+      # firefox
 
-    # Git/Github
-    git # Git
-    gh # Github
+      # Git/Github
+      git # Git
+      gh # Github
 
-    spotify # Music
-    obsidian # Notes
-    clickup # Task Management
-    discord # Social
-    feh # Image viewer
-    btop # Process Manager
+      spotify # Music
+      obsidian # Notes
+      clickup # Task Management
+      discord # Social
+      feh # Image viewer
+      btop # Process Manager
 
-    # Games
-    lutris
-    vulkan-tools
-    cemu
+      # Games
+      lutris
+      vulkan-tools
+      cemu
 
-    # Screenshots
-    slurp
-    grim
+      # Screenshots
+      slurp
+      grim
 
-    # Notification System
-    mako
-    libnotify
+      # Notification System
+      mako
+      libnotify
 
-    # Clipboard
-    wl-clipboard
+      # Clipboard
+      wl-clipboard
 
-    # Terminal
-    fastfetch
-    tmux
-    alacritty
-    tree
+      # Terminal
+      fastfetch
+      tmux
+      alacritty
+      tree
 
-    # Audio
-    alsa-utils
-    pavucontrol
+      # Audio
+      alsa-utils
+      pavucontrol
 
-    # Hyprland
-    waybar
-    hyprcursor
-    hypridle
-    hyprlock
-    hyprpaper
+      # Hyprland
+      waybar
+      hyprcursor
+      hyprlock
+      # hypridle
+      hyprpaper
 
-    # Display Management
-    nwg-displays
-  ];
+      # Display Management
+      nwg-displays
+
+      # Music Production
+      reaper
+      alsa-scarlett-gui
+    ];
 
   nixpkgs.config.packageOverrides = pkgs: {
     steam = pkgs.steam.override {

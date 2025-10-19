@@ -22,7 +22,12 @@
     # Home-Manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs"; # Inherits `inputs.nixpkgs` of current flake
+      # Inherits `inputs.nixpkgs` of current flake
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-matlab = {
+      url = "gitlab:doronbehar/nix-matlab";
     };
   };
 
@@ -31,6 +36,7 @@
     home-manager,
     nvf,
     sops-nix,
+    nix-matlab,
     ...
   } @ inputs: let
     mkNixosConfiguration = hostname:

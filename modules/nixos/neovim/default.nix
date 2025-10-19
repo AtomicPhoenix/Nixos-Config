@@ -4,7 +4,7 @@
     # enableManpages = true;
     settings = {
       vim = lib.mkMerge [
-        (import ./plugins { inherit lib;} ) 
+        (import ./plugins {inherit lib;})
         {
           autocmds = import ./autocmds.nix {inherit lib;};
           keymaps = import ./keymaps.nix;
@@ -19,7 +19,10 @@
 
           luaConfigPre = " listchars = { tab = '» '; trail = '·'; nbsp = '␣'; };";
 
-          lsp.enable = true;
+          lsp = {
+            enable = true;
+            formatOnSave = true;
+          };
           highlight.Command.italic = true;
 
           theme = {

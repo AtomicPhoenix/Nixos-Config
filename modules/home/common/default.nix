@@ -5,6 +5,7 @@
     ./bash.nix
     ./nix-direnv.nix
     ./firefox.nix
+    ./rofi.nix
     ./tmux.nix
     ./mpv.nix
     ./proton.nix
