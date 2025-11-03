@@ -3,7 +3,13 @@
     ./common
   ];
 
-  programs.ssh = {
+  programs.ssh = let
+    standard_config = hostname: {
+      inherit hostname;
+      identityFile = ["~/.ssh/ai-duo-personal"];
+      port = 8102;
+    };
+  in {
     enable = true;
     matchBlocks = {
       "github.com" = {
@@ -11,11 +17,12 @@
         identityFile = ["~/.ssh/ai-duo-github"];
       };
 
-      "ai-desk" = {
-        hostname = "ai-desk";
-        identityFile = ["~/.ssh/ai-duo-personal"];
-        port = 8102;
-      };
+      "ai-desk" = standard_config "ai-desk";
+
+      # Cluster Nodes
+      "master" = standard_config "master";
+      "worker" = standard_config "worker";
+      "worker-2" = standard_config "worker-2";
     };
   };
 
