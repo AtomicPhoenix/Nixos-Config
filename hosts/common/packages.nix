@@ -30,17 +30,16 @@
 
   services.tailscale.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages =
-    # let
-    # Rotate through wallpapers
-    # wallpaper_autoplay = (pkgs.writeScriptBin "wallpaper_autoplay" ./scripts/wallpaper_autoplay.sh).overrideAttrs (old: {
-    #   buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    # });
-    # in
+  environment.systemPackages = let
+    load_tmux = (pkgs.writeScriptBin "load_tmux" ./scripts/load_tmux.sh).overrideAttrs (old: {
+      buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    });
+  in
     with pkgs; [
-      # wallpaper_autoplay
+      # Self-defined packages
+      load_tmux
+
+      # VPN
       protonvpn-gui
 
       # SSH protocol implementation

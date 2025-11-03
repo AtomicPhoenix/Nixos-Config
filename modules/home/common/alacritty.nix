@@ -18,7 +18,6 @@
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
-      terminal.shell.program = "/home/ai/Documents/Scripts/loadTmux.sh";
     };
   };
 }

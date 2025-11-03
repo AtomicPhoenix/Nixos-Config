@@ -7,8 +7,7 @@
     # Whether to enable XWayland
     xwayland.enable = true;
 
-    # Optional
-    # Whether to enable hyprland-session.target on hyprland startup
+    # Enable hyprland-session.target on hyprland startup
     systemd.enable = true;
 
     settings = {
@@ -16,12 +15,11 @@
         "eDP-1, 2880x1800@120.0Hz, 0x0, 2"
         "eDP-2, 2880x1800@120.0Hz, 0x900, 2"
       ];
-      "$terminal" = "alacritty";
-      "$fileManager" = "thunar";
-      "$menu" = "rofi -show || (pkill rofi && rofi -show)";
-      "$webBrowser" = "firefox";
 
-      "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
+      "$open_menu" = "rofi -show || (pkill rofi && rofi -show)";
+
+      # Sets "Windows" key as main modifier
+      "$mainMod" = "SUPER";
 
       exec-once = [
         "mako &"
@@ -161,12 +159,13 @@
 
       bind = [
         # Application Shortcuts
-        "$mainMod, RETURN, exec, $terminal"
+        "$mainMod,       RETURN, exec, alacritty -e load_tmux"
+        "$mainMod SHIFT, RETURN, exec, alacritty"
         "$mainMod, Q, killactive,"
         "$mainMod, M, exec, hyprlock"
-        "$mainMod, F, exec, $webBrowser"
+        "$mainMod, F, exec, firefox"
         "$mainMod, V, togglefloating,"
-        "$mainMod, D, exec, $menu"
+        "$mainMod, D, exec, $open_menu"
         "$mainMod, P, pseudo, # dwindle"
         #bind = $mainMod, J, togglesplit, # dwindle
 
