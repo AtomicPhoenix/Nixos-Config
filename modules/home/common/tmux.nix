@@ -84,7 +84,6 @@
       setw -g mode-keys vi
 
       # Hook to run fastfetch on session creation
-      # set-hook -g after-new-session 'send-keys " clear &&  pokemon-colorscripts --no-title -r 1-7 | fastfetch --file-raw -" C-m'
       set-hook -g after-new-session 'send-keys " clear && fastfetch" C-m'
 
       # Options to make tmux more pleasant
