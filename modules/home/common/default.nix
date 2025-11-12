@@ -9,8 +9,9 @@
     ./tmux.nix
     ./mpv.nix
     ./proton.nix
-    ./hyprland.nix
     ./wayland.nix
+
+    ./hypr
   ];
 
   /**
