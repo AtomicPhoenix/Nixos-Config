@@ -97,9 +97,6 @@
       # hypridle
       hyprpaper
 
-      # Display Management
-      nwg-displays
-
       # Music Production
       reaper
       alsa-scarlett-gui
