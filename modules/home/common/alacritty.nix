@@ -5,6 +5,7 @@
     enable = true;
     # custom settings
     settings = {
+      window.opacity = 0.9;
       env.TERM = "xterm-256color";
       colors = {
         draw_bold_text_with_bright_colors = true;
