@@ -90,10 +90,11 @@
       alsa-utils
       pavucontrol
 
+      # Temperature Sensor
+      lm_sensors
+
       # Hyprland
-      waybar
       hyprcursor
-      # hypridle
       hyprpaper
 
       # Music Production

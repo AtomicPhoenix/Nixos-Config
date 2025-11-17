@@ -99,7 +99,7 @@
       };
       "custom/temperature" = {
         "exec" = "sensors | awk '/^Package id 0:/ {print int($4)}'";
-        "format" = "<span color='#FFA500'> </span>{}°C ";
+        "format" = "<span color='#FFA500'> °</span>{}°C ";
         "interval" = 5;
         "tooltip" = true;
         "tooltip-format" = "Current CPU temperature: {}°C";
