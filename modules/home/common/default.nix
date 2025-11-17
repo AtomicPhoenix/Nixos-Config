@@ -9,6 +9,7 @@
     ./tmux.nix
     ./mpv.nix
     ./proton.nix
+    ./waybar.nix
     ./wayland.nix
 
     ./hypr
