@@ -8,6 +8,7 @@
       spacing = 0;
       modules-left = [
         "hyprland/workspaces"
+        "systemd-failed-units"
         "tray"
         "custom/lock"
         "custom/reboot"
@@ -26,8 +27,6 @@
         "clock"
       ];
       "hyprland/workspaces" = {
-        disable-scroll = false;
-        all-outputs = true;
         format = "{icon}";
         on-click = "activate";
         format-icons = {
@@ -37,6 +36,13 @@
           "14" = "󰎞 ";
           "urgent" = "";
         };
+      };
+      "systemd-failed-units" = {
+        "hide-on-ok" = true; # Whether or not to hide if there are zero failed units.
+        "format" = "✗ {nr_failed}";
+        "format-ok" = "✓";
+        "system" = true; # Monitor failed systemwide units.
+        "user" = true; # Ignore failed user units.
       };
       "custom/lock" = {
         format = "<span color='#00FFFF'>  </span>";

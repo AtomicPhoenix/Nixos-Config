@@ -13,6 +13,7 @@
 
 #workspaces,
 #window,
+#systemd-failed-units,
 #tray {
   background-color: rgba(15, 27, 53, 0.9);
   padding: 4px 6px;
