@@ -226,7 +226,6 @@
       #custom-lock:hover,
       #custom-reboot:hover,
       #custom-power:hover,
-
       #window:hover {
         background-color: rgba(70, 75, 90, 0.9);
       }
