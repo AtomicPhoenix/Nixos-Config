@@ -1,18 +1,17 @@
 {lib, ...}: {
   imports = [
-    ./git.nix
     ./alacritty.nix
     ./bash.nix
-    ./nix-direnv.nix
     ./firefox.nix
+    ./git.nix
+    ./hypr
+    ./mpv.nix
+    ./nix-direnv.nix
+    ./proton.nix
     ./rofi.nix
     ./tmux.nix
-    ./mpv.nix
-    ./proton.nix
     ./waybar/waybar.nix
     ./wayland.nix
-
-    ./hypr
   ];
 
   /**
