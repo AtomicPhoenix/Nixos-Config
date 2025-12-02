@@ -46,6 +46,8 @@
       # VPN
       protonvpn-gui
 
+      cemu
+
       # SSH protocol implementation
       openssh
 
