@@ -11,6 +11,7 @@
     };
   in {
     enable = true;
+    enableDefaultConfig = false;
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
