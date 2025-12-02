@@ -23,11 +23,14 @@
     sensor.iio.enable = true;
 
     graphics = {
+      enable = true;
       # Add packages to the default graphics driver lookup path.
       extraPackages = with pkgs; [
+        vpl-gpu-rt
+        mesa
         intel-media-driver
-        vaapiIntel
-        vaapiVdpau
+        intel-vaapi-driver
+        libva-vdpau-driver
         libvdpau-va-gl
       ];
     };

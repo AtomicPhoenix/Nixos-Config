@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    protonup # Proton (For running games on Linux)
+    protonup-ng # Proton (For running games on Linux)
   ];
 
   home.sessionVariables = {
