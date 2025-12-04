@@ -6,6 +6,8 @@
       vim = lib.mkMerge [
         (import ./plugins {inherit lib;})
         {
+          utility.direnv.enable = true;
+
           autocmds = import ./autocmds.nix {inherit lib;};
           keymaps = import ./keymaps.nix;
           languages = import ./languages.nix;
