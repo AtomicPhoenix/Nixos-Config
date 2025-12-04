@@ -7,6 +7,7 @@ in {
   # Turn on Formatting, Treesitter, and extraDiagnostics for enabled languages by default
   enableFormat = true;
   enableTreesitter = true;
+  enableExtraDiagnostics = true;
 
   nix = enableLanguage;
   java = enableLanguage;

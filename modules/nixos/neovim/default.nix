@@ -21,10 +21,13 @@
 
           luaConfigPre = " listchars = { tab = '» '; trail = '·'; nbsp = '␣'; };";
 
+          binds.cheatsheet.enable = true;
+
           lsp = {
             enable = true;
             formatOnSave = true;
           };
+
           highlight.Command.italic = true;
 
           theme = {
