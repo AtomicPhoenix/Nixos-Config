@@ -14,4 +14,11 @@
     lua = true;
     desc = "Open diagnostic [Q]uickfix list";
   }
+  {
+    key = "<leader>r";
+    mode = ["n"];
+    silent = true;
+    action = "<cmd>LspRestart<CR>";
+    desc = "Restart LSP";
+  }
 ]
