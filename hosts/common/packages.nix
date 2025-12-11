@@ -46,7 +46,9 @@
       # VPN
       protonvpn-gui
 
+      # Emulators
       cemu
+      dolphin-emu
 
       # SSH protocol implementation
       openssh
