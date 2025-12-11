@@ -84,7 +84,7 @@
       };
       "pulseaudio" = {
         "format" = "<span color='#00FF7F'>{icon}</span>{volume}% ";
-        "format-muted" = "<span color='#FF4040'> 󰖁 </span>0% ";
+        "format-muted" = "<span color='#FF4040'> 󰖁 </span>{volume}% ";
         "format-icons" = {
           "headphone" = "<span color='#BF00FF'>  </span>";
           "hands-free" = "<span color='#BF00FF'>  </span>";
