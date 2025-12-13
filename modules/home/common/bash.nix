@@ -8,17 +8,20 @@
       eval "$(direnv hook bash)"
 
       function rebuild()  {
-        # Get hostname and rebuild
+        local host="$1"
         if [[ -z $host ]]; then
-          host="$HOSTNAME"
-          printf "\033[0;33mWARNING: \033[0mNo hostname specified. Defaulting to using hostname (%s) for flake...\n" "$HOSTNAME"
-        else
-          host="$1"
-          printf "Using flake %s...\n" "$host"
+          # Get hostname from system configuration if unspecified
+          host="$(hostnamectl --static)"
+          printf "\033[0;33mWARNING: \033[0mNo hostname specified. Defaulting to using hostname (%s) for flake...\n" "$host"
         fi
         printf "System will be rebuilt using the selected flake (%s)\n" "$host"
         printf " Rebuilding...\n\n"
         sudo nixos-rebuild switch --show-trace --flake ~/Nixos-Config/#$host
+
+        # Optional per-host hook
+        if declare -F rebuild_post > /dev/null; then
+          rebuild_post
+        fi
       }
     '';
 
