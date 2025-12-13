@@ -23,6 +23,10 @@
           rebuild_post
         fi
       }
+
+      function update() {
+        $(cd ~/Nixos-Config/ && sudo nix flake update)
+      }
     '';
 
     shellAliases = {
