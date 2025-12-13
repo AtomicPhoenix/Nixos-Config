@@ -11,7 +11,7 @@
         local host="$1"
         if [[ -z $host ]]; then
           # Get hostname from system configuration if unspecified
-          host="$(hostnamectl --static)"
+          host="$(hostname)"
           printf "\033[0;33mWARNING: \033[0mNo hostname specified. Defaulting to using hostname (%s) for flake...\n" "$host"
         fi
 
@@ -25,16 +25,13 @@
           rebuild_post
         fi
       }
-
-      function update() {
-        $(cd ~/Nixos-Config/ && sudo nix flake update)
-      }
     '';
 
     shellAliases = {
       ls = "ls --color=auto";
       grep = "grep --color=auto";
       unzip = "function _unzip(){ FILE=$1; FILENAME=$(basename \"$\{FILE%.*}\"); nix run nixpkgs#unzip \"$FILE\" -- -d ./$FILENAME && echo \"Unzipped files to $PWD/$FILENAME\"; };_unzip";
+      update = "(cd ~/Nixos-Config && sudo nix flake update) || echo 'Failed to update system flake'";
     };
   };
 
