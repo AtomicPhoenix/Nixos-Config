@@ -25,13 +25,15 @@
           rebuild_post
         fi
       }
+
+      function update() {
+       (cd ~/Nixos-Config && sudo nix flake update) || echo 'Failed to update system flake';
+      }
     '';
 
     shellAliases = {
       ls = "ls --color=auto";
       grep = "grep --color=auto";
-      unzip = "function _unzip(){ FILE=$1; FILENAME=$(basename \"$\{FILE%.*}\"); nix run nixpkgs#unzip \"$FILE\" -- -d ./$FILENAME && echo \"Unzipped files to $PWD/$FILENAME\"; };_unzip";
-      update = "(cd ~/Nixos-Config && sudo nix flake update) || echo 'Failed to update system flake'";
     };
   };
 

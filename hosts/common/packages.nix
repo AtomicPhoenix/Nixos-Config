@@ -37,11 +37,15 @@
     randomize_wallpaper = (pkgs.writeShellScriptBin "randomize_wallpaper" ./scripts/randomize_wallpaper.sh).overrideAttrs (old: {
       buildCommand = "${old.buildCommand}\n patchShebangs $out";
     });
+    unzip = (pkgs.writeShellScriptBin "unzip" ./scripts/unzip.sh).overrideAttrs (old: {
+      buildCommand = "${old.buildCommand}\n patchShebangs $out";
+    });
   in
     with pkgs; [
       # Self-defined packages
       load_tmux
       randomize_wallpaper
+      unzip
 
       # VPN
       protonvpn-gui
