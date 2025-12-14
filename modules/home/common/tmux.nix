@@ -12,13 +12,6 @@
         extraConfig = "set -g @resurrect-strategy-nvim 'session'";
       }
       {
-        plugin = tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '60' # minutes
-        '';
-      }
-      {
         plugin = tmuxPlugins.vim-tmux-navigator;
         extraConfig = ''
           set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
