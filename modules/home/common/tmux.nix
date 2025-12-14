@@ -60,25 +60,25 @@
           set -g @tokyo-night-tmux_show_wbg 1
         '';
       }
-      # tmuxPlugins.logging
     ];
     extraConfig = ''
+      # Reload tmux config command
       bind r source-file ~/.config/tmux/tmux.conf \; display "Configuration Reloaded!"
 
       # Split Panes
-      bind \\ split-window -h
-      bind - split-window -v
-      unbind '"'
-      unbind %
+      bind \\ split-window -h # Horizontal
+      bind - split-window -v  # Vertical
 
-      # Fast Split Change
+      # Use Vi-style keybindings in copy mode.
       setw -g mode-keys vi
 
       # Hook to run fastfetch on session creation
-      set-hook -g after-new-session 'send-keys " clear && fastfetch" C-m'
+      set-hook -g after-new-session 'send-keys -R " clear && fastfetch" C-m'
 
-      # Options to make tmux more pleasant
+      # Enable mouse support
       set -g mouse on
+
+      # Ensure 256-color support
       set -g default-terminal "tmux-256color"
     '';
   };
