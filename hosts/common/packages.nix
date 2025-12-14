@@ -68,7 +68,8 @@
       # Git
       git # Git
       gh # Github
-      jq # Required for tmux web based git plguin
+      jq # Required for tmux web based git plugin
+      bc # Required for tmux web based git plugin
 
       spotify # Music
       obsidian # Notes

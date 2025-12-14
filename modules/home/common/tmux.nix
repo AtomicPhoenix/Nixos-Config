@@ -25,7 +25,7 @@
           set -g @vim_navigator_mapping_right "C-Right C-l"
           set -g @vim_navigator_mapping_up "C-k"
           set -g @vim_navigator_mapping_down "C-j"
-          set -g @vim_navigator_mapping_prev ""  # removes the C-\ binding
+          set -g @vim_navigator_mapping_prev ""  # Remove default C-\ binding
         '';
       }
       {
@@ -45,12 +45,10 @@
           # No extra spaces between icons
           set -g @tokyo-night-tmux_window_tidy_icons 0
 
-          # To disable date time widget
+          # Date time widget
           set -g @tokyo-night-tmux_show_datetime 0
-          set -g @tokyo-night-tmux_date_format MYD
-          set -g @tokyo-night-tmux_time_format 12H
 
-          # Now playing
+          # Now playing widget
           set -g @tokyo-night-tmux_show_music 0
 
           # Netspeed widget (requires package 'bc')
@@ -61,15 +59,13 @@
           set -g @tokyo-night-tmux_path_format relative # 'relative' or 'full'
 
           # Battery widget
-          set -g @tokyo-night-tmux_show_battery_widget 1
-          set -g @tokyo-night-tmux_battery_name "BAT0"  # some linux distro have 'BAT0'
-          set -g @tokyo-night-tmux_battery_low_threshold 21
+          set -g @tokyo-night-tmux_show_battery_widget 0
 
           # Git widget
-          set -g @tokyo-night-tmux_show_git 1 # default 1
+          set -g @tokyo-night-tmux_show_git 1
 
           # Web Based Git widget
-          set -g @tokyo-night-tmux_show_wbg 1 # default 1
+          set -g @tokyo-night-tmux_show_wbg 1
         '';
       }
       # tmuxPlugins.logging
