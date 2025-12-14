@@ -95,6 +95,7 @@
       # Terminal
       fastfetch
       tmux
+      bc # Required for tmux netspeed plugin
       alacritty
       tree
 

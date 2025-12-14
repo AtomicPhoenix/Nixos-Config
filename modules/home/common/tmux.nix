@@ -55,7 +55,7 @@
 
           # Net speed widget
           set -g @tokyo-night-tmux_show_netspeed 1
-          set -g @tokyo-night-tmux_netspeed_iface "wlan0" # Detected via default route
+          set -g @tokyo-night-tmux_netspeed_iface "wlo1" # Detected via default route
           set -g @tokyo-night-tmux_netspeed_showip 0      # Display IPv4 address (default 0)
           set -g @tokyo-night-tmux_netspeed_refresh 1     # Update interval in seconds (default 1)
 
