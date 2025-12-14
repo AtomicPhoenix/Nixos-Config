@@ -65,9 +65,10 @@
       # File Browsers
       # firefox
 
-      # Git/Github
+      # Git
       git # Git
       gh # Github
+      jq # Required for tmux web based git plguin
 
       spotify # Music
       obsidian # Notes

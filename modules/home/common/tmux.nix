@@ -56,14 +56,20 @@
           # Netspeed widget (requires package 'bc')
           set -g @tokyo-night-tmux_show_netspeed 0
 
-          # Path Widget
+          # Path widget
           set -g @tokyo-night-tmux_show_path 1
           set -g @tokyo-night-tmux_path_format relative # 'relative' or 'full'
 
-          # Battery Widget
+          # Battery widget
           set -g @tokyo-night-tmux_show_battery_widget 1
           set -g @tokyo-night-tmux_battery_name "BAT0"  # some linux distro have 'BAT0'
-          set -g @tokyo-night-tmux_battery_low_threshold 21 # default
+          set -g @tokyo-night-tmux_battery_low_threshold 21
+
+          # Git widget
+          set -g @tokyo-night-tmux_show_git 1 # default 1
+
+          # Web Based Git widget
+          set -g @tokyo-night-tmux_show_wbg 1 # default 1
         '';
       }
       # tmuxPlugins.logging
