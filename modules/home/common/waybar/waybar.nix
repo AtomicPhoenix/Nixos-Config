@@ -121,7 +121,6 @@
       };
       "clock" = {
         "interval" = 1;
-        "timezone" = "US/Eastern";
         "format" = "<span color='#BF00FF'>  </span>{:%H:%M} ";
         "tooltip" = true;
         "tooltip-format" = "{:L%A, %B %d, %Y}";

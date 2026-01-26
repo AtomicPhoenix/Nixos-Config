@@ -10,6 +10,9 @@
   # Define hostname.
   networking.hostName = "ai-desk";
 
+  # Set time zone.
+  time.timeZone = "America/New_York";
+
   boot.initrd.kernelModules = ["amdgpu"];
   boot.loader = lib.mkForce {
     efi = {
