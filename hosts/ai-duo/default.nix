@@ -17,6 +17,9 @@
   # Enable Bolt daemon for thunderbolt devices
   services.hardware.bolt.enable = true;
 
+  # Optimizes battery life
+  services.tlp.enable = true;
+
   hardware = {
     # Support IIO sensors with iio-sensor-proxy.
     # Accelerometer for laptop
