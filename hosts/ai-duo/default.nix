@@ -38,7 +38,16 @@
       ];
     };
   };
-  nixpkgs.overlays = [inputs.nix-matlab.overlay];
+
+  # Add matlab and unstable packages
+  nixpkgs.overlays = let
+    unstable-pkgs = final: _prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+      };
+    };
+  in [inputs.nix-matlab.overlay unstable-pkgs];
 
   environment.systemPackages = let
     get-kbd-connected = (pkgs.writeScriptBin "get-kbd-connected" ./scripts/get-kbd-connected.sh).overrideAttrs (old: {
@@ -59,6 +68,8 @@
       toggle-monitor
       duo-manage-monitors
       brightnessctl
+      wireshark
+      unstable.ciscoPacketTracer9
     ];
 
   users.users.ai.openssh.authorizedKeys.keys = [
