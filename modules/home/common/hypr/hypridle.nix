@@ -19,8 +19,8 @@ _: {
       listener = [
         {
           timeout = 120;
-          on-timeout = "brightnessctl -d intel_backlight s 30% &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)";
-          on-resume = "brightnessctl -d intel_backlight s 100% &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)";
+          on-timeout = "brightnessctl -d intel_backlight s 30% &&  brightnessctl -d card1-eDP-2-backlight s 30%";
+          on-resume = "brightnessctl -d intel_backlight s 100% &&  brightnessctl -d card1-eDP-2-backlight s 100%";
         }
         {
           timeout = 240;
