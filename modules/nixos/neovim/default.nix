@@ -26,6 +26,25 @@
           lsp = {
             enable = true;
             formatOnSave = true;
+            lspconfig.enable = true;
+
+            servers = {
+              "*" = {
+                root_markers = [".git"];
+                capabilities = {
+                  textDocument = {
+                    semanticTokens = {
+                      multilineTokenSupport = true;
+                    };
+                  };
+                };
+              };
+
+              "clangd" = {
+                root_markers = [".clangd" "compile_commands.json"];
+                filetypes = ["c" "cpp"];
+              };
+            };
           };
 
           highlight.Command.italic = true;

@@ -113,6 +113,9 @@
       # Music Production
       reaper
       alsa-scarlett-gui
+
+      # Office Suite
+      libreoffice
     ];
 
   nixpkgs.config.packageOverrides = pkgs: {

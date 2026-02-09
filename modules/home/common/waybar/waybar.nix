@@ -121,7 +121,7 @@
       };
       "clock" = {
         "interval" = 1;
-        "timezone" = "US/Eastern";
+        "timezone" = ""; # System local time
         "format" = "<span color='#BF00FF'>  </span>{:%H:%M} ";
         "tooltip" = true;
         "tooltip-format" = "{:L%A, %B %d, %Y}";
