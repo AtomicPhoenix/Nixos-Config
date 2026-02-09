@@ -2,6 +2,7 @@
 {
   pkgs,
   inputs,
+  pkgs-unstable,
   ...
 }: {
   imports = [
@@ -39,15 +40,8 @@
     };
   };
 
-  # Add matlab and unstable packages
-  nixpkgs.overlays = let
-    unstable-pkgs = final: _prev: {
-      unstable = import inputs.nixpkgs-unstable {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
-    };
-  in [inputs.nix-matlab.overlay unstable-pkgs];
+  # Add matlab packages
+  nixpkgs.overlays = [inputs.nix-matlab.overlay];
 
   environment.systemPackages = let
     get-kbd-connected = (pkgs.writeScriptBin "get-kbd-connected" ./scripts/get-kbd-connected.sh).overrideAttrs (old: {
@@ -69,7 +63,7 @@
       duo-manage-monitors
       brightnessctl
       wireshark
-      unstable.ciscoPacketTracer9
+      pkgs-unstable.ciscoPacketTracer9
     ];
 
   users.users.ai.openssh.authorizedKeys.keys = [
