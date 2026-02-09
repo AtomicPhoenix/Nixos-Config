@@ -293,12 +293,6 @@ _: {
       ### WINDOWS AND WORKSPACES ###
       ##############################
 
-      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-      # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
-
-      # Example windowrule v1
-      # windowrule = float, ^(kitty)$
-
       windowrule = [
         {
           name = "Firefox PiP";
