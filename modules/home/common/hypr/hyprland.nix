@@ -311,7 +311,7 @@ _: {
         }
         {
           name = "Discord";
-          "match:initial_title" = "Discord";
+          "match:initial_class" = "discord";
           workspace = "11 silent";
           monitor = 1;
         }
