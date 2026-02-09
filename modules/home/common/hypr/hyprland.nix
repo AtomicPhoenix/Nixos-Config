@@ -1,9 +1,8 @@
-{pkgs, ...}: {
+_: {
   wayland.windowManager.hyprland = {
-    # Whether to enable Hyprland wayland compositor
+    # Enable Hyprland wayland compositor
     enable = true;
-    # The hyprland package to use
-    package = pkgs.hyprland;
+
     # Whether to enable XWayland
     xwayland.enable = true;
 
@@ -301,37 +300,50 @@
       # windowrule = float, ^(kitty)$
 
       windowrule = [
-        "float, class: blueman-manager"
-        "size 60% 60%, class: blueman-manager"
-        "float, class: [Tt]hunar"
-        "size 60% 60%, class: [Tt]hunar"
-        "float, class: xdg-desktop-portal-gtk"
-        "size 60% 60%, class: xdg-desktop-portal-gtk"
-        "float, class: nm-connection-editor"
-        "size 40% 40%, class: nm-connection-editor"
-        # windowrule = float,class:^(kitty)$,title:^(kitty)$
-        "pin,class:mpv"
-        "size 40% 40%,class:mpv"
-        "opacity 1.0 override 1.0 override 1.0 override, class:mpv"
-
-        "float,class:mpv"
-        "pin,class:firefox,initialTitle:^Picture.*$ "
-        "size 40% 40%,class:firefox,initialTitle:^Picture.*$ "
-        "float,class:firefox,initialTitle:^Picture.*$ "
-
-        "workspace 11, initialTitle:^(Discord)(.*)$"
-        "monitor 1, initialTitle:^(Discord)(.*)$"
-
-        "workspace 12, initialTitle:^(Spotify)(.*)$"
-        "monitor 1, initialTitle:^(Spotify)(.*)$"
-
-        "workspace 13, initialTitle:^(ClickUp)(.*)$"
-        "monitor 1, initialTitle:^(ClickUp)(.*)$"
-
-        "workspace 14, class:obsidian"
-        "monitor 1, class:obsidian"
-
-        "suppressevent maximize, class:.* # You'll probably like this."
+        {
+          name = "firefox PiP";
+          "match:class" = "firefox";
+          "match:initial_title" = "^Picture.*$";
+          pin = "on";
+          float = "on";
+          size = "40% 40%";
+        }
+        {
+          name = "mpv";
+          "match:class" = "mpv";
+          pin = "on";
+          float = "on";
+          size = "40% 40%";
+        }
+        {
+          name = "Discord";
+          "match:initial_title" = "Discord";
+          workspace = "11 silent";
+          monitor = 2;
+        }
+        {
+          name = "Spotify";
+          "match:initial_class" = "spotify";
+          workspace = "12 silent";
+          monitor = 2;
+        }
+        {
+          name = "ClickUp";
+          "match:initial_class" = "ClickUp";
+          workspace = "13 silent";
+          monitor = 2;
+        }
+        {
+          name = "Obsidian";
+          "match:initial_class" = "obsidian";
+          workspace = "14 silent";
+          monitor = 2;
+        }
+        {
+          name = "All";
+          "match:initial_class" = ".*";
+          suppress_event = "maximize";
+        }
       ];
     };
   };
