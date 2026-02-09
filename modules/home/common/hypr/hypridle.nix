@@ -10,7 +10,7 @@ _: {
           hyprctl dispatch dpms on;
           nmcli radio wifi on;
           brightnessctl -d intel_backlight s 100%;
-          brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g);
+          brightnessctl -d card1-eDP-2-backlight s 100%;
         '';
         ignore_dbus_inhibit = false; # Don't ignore dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
         ignore_systemd_inhibit = false; # Don't ignore systemd-inhibit --what=idle inhibitors
