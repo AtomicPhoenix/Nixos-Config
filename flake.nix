@@ -41,10 +41,15 @@
     nix-matlab,
     ...
   } @ inputs: let
+    system = "x86_64-linux";
+    pkgs-unstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
     mkNixosConfiguration = hostname:
       nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;}; # Let submodules access inputs
-        system = "x86_64-linux";
+        specialArgs = {inherit inputs pkgs-unstable;}; # Let submodules access inputs and pkgs-unstable
+        inherit system;
         modules = [
           # Device configuration file
           ./hosts/${hostname}
