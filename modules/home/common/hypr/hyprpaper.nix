@@ -1,12 +1,15 @@
-{...}: {
+{pkgs-unstable, ...}: {
   services.hyprpaper = {
     enable = true;
+    package = pkgs-unstable.hyprpaper;
     settings = {
-      ipc = true;
+      ipc = false;
       splash = false;
 
-      preload = "/home/ai/Pictures/Wallpapers/aki.png";
-      wallpaper = ",/home/ai/Pictures/Wallpapers/aki.png";
+      wallpaper = {
+        monitor = "eDP-1";
+        path = "/home/ai/Pictures/Wallpapers/";
+      };
     };
   };
 }
