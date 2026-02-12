@@ -336,6 +336,12 @@
           monitor = 1;
         }
         {
+          name = "ProtonVPN";
+          "match:initial_title" = "Proton VPN";
+          size = "(400) (700)";
+          center = true;
+        }
+        {
           name = "All";
           "match:initial_class" = ".*";
           suppress_event = "maximize";
