@@ -1,4 +1,4 @@
-_: [
+[
   {
     name = "Firefox PiP";
     "match:initial_class" = "firefox";
