@@ -1,7 +1,8 @@
-_: {
+{pkgs-unstable, ...}: {
   wayland.windowManager.hyprland = {
     # Enable Hyprland wayland compositor
     enable = true;
+    package = pkgs-unstable.hyprland;
 
     # Whether to enable XWayland
     xwayland.enable = true;
@@ -107,7 +108,7 @@ _: {
       # https://wiki.hyprland.org/Configuring/Variables/#misc
       misc = {
         force_default_wallpaper = 1; # Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background
+        disable_hyprland_logo = true; # If true disables the random hyprland logo / anime girl background
         disable_splash_rendering = true; # Disable default wallpaper & splash text
       };
 
@@ -128,6 +129,7 @@ _: {
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
+          disable_while_typing = true;
           natural_scroll = false;
         };
       };
