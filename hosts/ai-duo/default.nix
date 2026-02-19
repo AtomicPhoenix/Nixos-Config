@@ -56,13 +56,6 @@
       name = "duo-manage-monitors";
       text = builtins.readFile ./scripts/duo-manage-monitors.sh;
     };
-    set-brightness = pkgs.writeShellApplication {
-      name = "set-brightness";
-      runtimeInputs = with pkgs; [
-        curl
-      ];
-      text = builtins.readFile ./scripts/set-brightness.sh;
-    };
   in
     with pkgs; [
       matlab
@@ -71,8 +64,6 @@
       get-kbd-connected
       toggle-monitor
       duo-manage-monitors
-      set-brightness
-      brightnessctl
       wireshark
       pkgs-unstable.ciscoPacketTracer9
     ];
