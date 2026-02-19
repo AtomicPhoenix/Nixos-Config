@@ -33,18 +33,10 @@
     load_tmux = (pkgs.writeScriptBin "load_tmux" ./scripts/load_tmux.sh).overrideAttrs (old: {
       buildCommand = "${old.buildCommand}\n patchShebangs $out";
     });
-    randomize_wallpaper = (pkgs.writeShellScriptBin "randomize_wallpaper" ./scripts/randomize_wallpaper.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
-    unzip = (pkgs.writeShellScriptBin "unzip" ./scripts/unzip.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
   in
     with pkgs; [
       # Self-defined packages
       load_tmux
-      randomize_wallpaper
-      unzip
 
       # VPN
       protonvpn-gui
@@ -56,8 +48,9 @@
       # SSH protocol implementation
       openssh
 
-      # File editor
+      # File Management
       vim
+      unzip
 
       direnv # direnv
 
