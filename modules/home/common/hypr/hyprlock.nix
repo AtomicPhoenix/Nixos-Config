@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       background = {
-        path = "/home/ai/Pictures/Wallpapers/aki.png";
+        path = "/home/ai/Pictures/Wallpapers/jjk_culling_games.png";
       };
 
       # GENERAL
