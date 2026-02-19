@@ -1,8 +1,7 @@
-{pkgs-unstable, ...}: {
+_: {
   wayland.windowManager.hyprland = {
     # Enable Hyprland wayland compositor
     enable = true;
-    package = pkgs-unstable.hyprland;
 
     # Whether to enable XWayland
     xwayland.enable = true;
@@ -108,7 +107,7 @@
       # https://wiki.hyprland.org/Configuring/Variables/#misc
       misc = {
         force_default_wallpaper = 1; # Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo = true; # If true disables the random hyprland logo / anime girl background
+        disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background
         disable_splash_rendering = true; # Disable default wallpaper & splash text
       };
 
@@ -129,7 +128,6 @@
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
         touchpad = {
-          disable_while_typing = true;
           natural_scroll = false;
         };
       };
@@ -291,7 +289,56 @@
       # Connect Mouse
       # bind = $mainMod SHIFT, B, exec, /usr/bin/BT5MouseConnect.sh
 
-      windowrule = import ./windowrules.nix;
+      ##############################
+      ### WINDOWS AND WORKSPACES ###
+      ##############################
+
+      windowrule = [
+        {
+          name = "Firefox PiP";
+          "match:initial_class" = "firefox";
+          "match:initial_title" = "^Picture.*$";
+          pin = "on";
+          float = "on";
+          size = "(monitor_w*.4) (monitor_h*.4)";
+        }
+        {
+          name = "mpv";
+          "match:class" = "mpv";
+          pin = "on";
+          float = "on";
+          size = "(monitor_w*.4) (monitor_h*.4)";
+        }
+        {
+          name = "Discord";
+          "match:initial_class" = "discord";
+          workspace = "11 silent";
+          monitor = 1;
+        }
+        {
+          name = "Spotify";
+          "match:initial_class" = "spotify";
+          workspace = "12 silent";
+          monitor = 1;
+        }
+        {
+          name = "ClickUp";
+          "match:initial_class" = "ClickUp";
+          workspace = "13 silent";
+          monitor = 1;
+        }
+        {
+          name = "Obsidian";
+          "match:initial_class" = "obsidian";
+          workspace = "14";
+          monitor = 1;
+        }
+        {
+          name = "All";
+          "match:initial_class" = ".*";
+          suppress_event = "maximize";
+        }
+      ];
     };
   };
 }
