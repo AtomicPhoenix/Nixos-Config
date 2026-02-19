@@ -6,7 +6,11 @@ _: {
       general = {
         lock_cmd = "pidof hyprlock || hyprlock;"; # Avoid starting multiple hyprlock instances.
         before_sleep_cmd = "loginctl lock-session;";
-        after_sleep_cmd = "hyprctl dispatch dpms on;";
+        after_sleep_cmd = ''
+          hyprctl dispatch dpms on;
+          nmcli radio wifi on;
+          set-brightness 100%";
+        '';
         ignore_dbus_inhibit = false; # Don't ignore dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
         ignore_systemd_inhibit = false; # Don't ignore systemd-inhibit --what=idle inhibitors
         ignore_wayland_inhibit = false; # Don't ignore wayland protocol inhibition requests (e.g. from running video players)
@@ -14,7 +18,8 @@ _: {
       listener = [
         {
           timeout = 120;
-          on-timeout = "loginctl lock-session;";
+          on-timeout = "set-brightness 30%";
+          on-resume = "set-brightness 100%";
         }
         {
           timeout = 180;

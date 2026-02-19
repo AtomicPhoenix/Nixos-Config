@@ -13,18 +13,10 @@
 
     steam = {
       enable = true;
-      gamescopeSession.enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
-
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
-
-    gamemode.enable = true;
   };
 
   services.tailscale.enable = true;
@@ -33,54 +25,48 @@
     load_tmux = (pkgs.writeScriptBin "load_tmux" ./scripts/load_tmux.sh).overrideAttrs (old: {
       buildCommand = "${old.buildCommand}\n patchShebangs $out";
     });
-    randomize_wallpaper = (pkgs.writeShellScriptBin "randomize_wallpaper" ./scripts/randomize_wallpaper.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
-    unzip = (pkgs.writeShellScriptBin "unzip" ./scripts/unzip.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
+    set-brightness = pkgs.writeShellApplication {
+      name = "set-brightness";
+      runtimeInputs = with pkgs; [
+        brightnessctl
+      ];
+      text = builtins.readFile ./scripts/set-brightness.sh;
+    };
   in
     with pkgs; [
       # Self-defined packages
       load_tmux
-      randomize_wallpaper
-      unzip
+      set-brightness
 
       # VPN
       protonvpn-gui
 
-      # Emulators
+      # Games
+      lutris
+      vulkan-tools
       cemu
       dolphin-emu
 
       # SSH protocol implementation
       openssh
 
-      # File editor
+      # File Management
       vim
+      unzip
 
-      direnv # direnv
+      # Git/Github
+      git
+      gh
 
-      # File Browsers
-      # firefox
+      # Required for tmux web based git plugin
+      jq
+      bc
 
-      # Git
-      git # Git
-      gh # Github
-      jq # Required for tmux web based git plugin
-      bc # Required for tmux web based git plugin
-
-      spotify # Music
-      obsidian # Notes
-      clickup # Task Management
-      discord # Social
-      feh # Image viewer
-      btop # Process Manager
-
-      # Games
-      lutris
-      vulkan-tools
-      cemu
+      # Misc. Apps
+      spotify
+      obsidian
+      clickup
+      discord
 
       # Screenshots
       slurp
@@ -98,15 +84,15 @@
       tmux
       alacritty
       tree
+      feh
+      btop
 
       # Audio
       alsa-utils
       pavucontrol
 
       # Temperature Sensor
-      lm_sensors
-
-      # Hyprland
+      lm_sensors # Hyprland
       hyprcursor
 
       # Music Production
