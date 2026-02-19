@@ -13,18 +13,10 @@
 
     steam = {
       enable = true;
-      gamescopeSession.enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
-
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
-
-    gamemode.enable = true;
   };
 
   services.tailscale.enable = true;
@@ -41,7 +33,9 @@
       # VPN
       protonvpn-gui
 
-      # Emulators
+      # Games
+      lutris
+      vulkan-tools
       cemu
       dolphin-emu
 
@@ -52,28 +46,19 @@
       vim
       unzip
 
-      direnv # direnv
+      # Git/Github
+      git
+      gh
 
-      # File Browsers
-      # firefox
+      # Required for tmux web based git plugin
+      jq
+      bc
 
-      # Git
-      git # Git
-      gh # Github
-      jq # Required for tmux web based git plugin
-      bc # Required for tmux web based git plugin
-
-      spotify # Music
-      obsidian # Notes
-      clickup # Task Management
-      discord # Social
-      feh # Image viewer
-      btop # Process Manager
-
-      # Games
-      lutris
-      vulkan-tools
-      cemu
+      # Misc. Apps
+      spotify
+      obsidian
+      clickup
+      discord
 
       # Screenshots
       slurp
@@ -91,6 +76,8 @@
       tmux
       alacritty
       tree
+      feh
+      btop
 
       # Audio
       alsa-utils
