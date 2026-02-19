@@ -7,8 +7,9 @@
       splash = false;
 
       wallpaper = {
-        monitor = "eDP-1";
+        monitor = "*"; # Duplicate across all monitors
         path = "/home/ai/Pictures/Wallpapers/";
+        timeout = 180;
       };
     };
   };
