@@ -25,10 +25,18 @@
     load_tmux = (pkgs.writeScriptBin "load_tmux" ./scripts/load_tmux.sh).overrideAttrs (old: {
       buildCommand = "${old.buildCommand}\n patchShebangs $out";
     });
+    set-brightness = pkgs.writeShellApplication {
+      name = "set-brightness";
+      runtimeInputs = with pkgs; [
+        brightnessctl
+      ];
+      text = builtins.readFile ./scripts/set-brightness.sh;
+    };
   in
     with pkgs; [
       # Self-defined packages
       load_tmux
+      set-brightness
 
       # VPN
       protonvpn-gui
@@ -84,9 +92,7 @@
       pavucontrol
 
       # Temperature Sensor
-      lm_sensors
-
-      # Hyprland
+      lm_sensors # Hyprland
       hyprcursor
 
       # Music Production
