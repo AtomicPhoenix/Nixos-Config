@@ -15,8 +15,6 @@ _: {
         "eDP-2, 2880x1800@120.0Hz, 0x900, 2"
       ];
 
-      "$open_menu" = "rofi -show || (pkill rofi && rofi -show)";
-
       # Sets "Windows" key as main modifier
       "$mainMod" = "SUPER";
 
@@ -28,6 +26,7 @@ _: {
         "clickup"
         "discord"
         "sudo btmgmt le on"
+        "systemctl --user start hyprpolkitagent"
       ];
 
       env = [
@@ -153,18 +152,18 @@ _: {
       "$obsidianIcon" = "~/Pictures/Icons/obsidian.png";
 
       bind = [
+        # Window Dispatchers
+        "$mainMod, P, pseudo," # Toggle dwindle's psuedotile mode
+        "$mainMod, Q, killactive," # Kill active window
+        "$mainMod, V, togglefloating," # Toggle floating window mode
+
         # Application Shortcuts
         "$mainMod,       RETURN, exec, alacritty -e load_tmux"
         "$mainMod SHIFT, RETURN, exec, alacritty"
-        "$mainMod, Q, killactive,"
-        "$mainMod, M, exec, hyprlock"
+        "$mainMod, M, exec, hyprlock" # Lock Screen
         "$mainMod, F, exec, firefox"
-        "$mainMod, V, togglefloating,"
-        "$mainMod, D, exec, $open_menu"
-        "$mainMod, P, pseudo, # dwindle"
-        #bind = $mainMod, J, togglesplit, # dwindle
+        "$mainMod, D, exec, rofi -show || (pkill rofi && rofi -show)" # Open Rofi Menu
 
-        # More aforementioned application shortcuts
         "$mainMod CTRL, S, exec, (hyprctl dispatch focuswindow class:spotify  | grep ok)  || (notify-send -i $spotifyIcon  'Starting Spotify'  && spotify  $useWayland)"
         "$mainMod CTRL, D, exec, (hyprctl dispatch focuswindow class:discord  | grep ok)  || (notify-send -i $discordIcon  'Starting Discord'  && discord  $useWayland)"
         "$mainMod CTRL, C, exec, (hyprctl dispatch focuswindow class:ClickUp  | grep ok)  || (notify-send -i $clickUpIcon  'Starting Clickup'  && clickup  $useWayland)"
@@ -226,12 +225,13 @@ _: {
         "$mainMod SHIFT, B, exec,  pkill waybar || waybar"
       ];
 
+      # Repating Binds that will also work in a lock screen
       bindel = [
         # Audio Settings
+        ", XF86AudioMute, exec, amixer set Master toggle"
         ", XF86AudioLowerVolume, exec, amixer set Master 5%-"
         ", XF86AudioRaiseVolume, exec, amixer set Master 5%+"
-        ", XF86AudioMute, exec, amixer set Master toggle"
-        " ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
 
         ", F1, exec, amixer set Master toggle"
         ", F2, exec, amixer set Master 5%-"
@@ -239,18 +239,13 @@ _: {
         ", F7, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
 
         # Brightness Settings
-        " ,XF86MonBrightnessUp, exec, brightnessctl -d intel_backlight s 10%+ && brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)"
-        " ,XF86MonBrightnessDown, exec, brightnessctl -d intel_backlight s 10%- &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)"
-        " ,XF86KbdBrightnessUp, exec, brightnessctl -d asus::kbd_backlight s 1+"
-        " ,XF86KbdBrightnessDown, exec, brightnessctl -d asus::kbd_backlight s 1-"
-
-        " ,F5, exec, brightnessctl -d intel_backlight s 10%-"
-        " ,F6, exec, brightnessctl -d intel_backlight s 10%+"
+        ", F5, exec, set-brightness 5%-"
+        ", F6, exec, set-brightness 5%+"
       ];
 
       # Repeating Binds
       binde = [
-        # Move focus with mainMod + arrow keys
+        # Switch workspace with mainMod + arrow keys
         "$mainMod ALT, left, workspace, -1"
         "$mainMod ALT, right, workspace, +1"
         "$mainMod ALT, p, workspace, previous"
@@ -260,9 +255,6 @@ _: {
         "$mainMod SHIFT, right, resizeactive,  40 0"
         "$mainMod SHIFT, down, resizeactive,  0  40"
         "$mainMod SHIFT, up, resizeactive,  0  -40"
-
-        # Lock Screen
-        "$mainMod SHIFT, L, exec, hyprlock"
 
         # Move Windows with mainMod + ctrl + arrow keys
         "$mainMod CTRL, left, movewindow, l"
@@ -274,9 +266,9 @@ _: {
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        # Additional Mouse Buttons
-        ", mouse:276, exec, RaiseVolume.sh"
-        ", mouse:275, exec, LowerVolume.sh"
+        # Raise/lower windows with mouse side buttons
+        ", mouse:276, exec, amixer set Master 5%+"
+        ", mouse:275, exec, amixer set Master 5%-"
       ];
 
       # Mouse binds
