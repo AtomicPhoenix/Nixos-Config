@@ -39,12 +39,20 @@
     unzip = (pkgs.writeShellScriptBin "unzip" ./scripts/unzip.sh).overrideAttrs (old: {
       buildCommand = "${old.buildCommand}\n patchShebangs $out";
     });
+    set-brightness = pkgs.writeShellApplication {
+      name = "set-brightness";
+      runtimeInputs = with pkgs; [
+        brightnessctl
+      ];
+      text = builtins.readFile ./scripts/set-brightness.sh;
+    };
   in
     with pkgs; [
       # Self-defined packages
       load_tmux
       randomize_wallpaper
       unzip
+      set-brightness
 
       # VPN
       protonvpn-gui
