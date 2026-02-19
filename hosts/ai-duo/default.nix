@@ -44,15 +44,25 @@
   nixpkgs.overlays = [inputs.nix-matlab.overlay];
 
   environment.systemPackages = let
-    get-kbd-connected = (pkgs.writeScriptBin "get-kbd-connected" ./scripts/get-kbd-connected.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
-    toggle-monitor = (pkgs.writeScriptBin "toggle-monitor" ./scripts/toggle-monitor.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
-    duo-manage-monitors = (pkgs.writeScriptBin "duo-manage-monitors" ./scripts/duo-manage-monitors.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
+    get-kbd-connected = pkgs.writeShellApplication {
+      name = "get-kbd-connected";
+      text = builtins.readFile ./scripts/get-kbd-connected.sh;
+    };
+    toggle-monitor = pkgs.writeShellApplication {
+      name = "toggle-monitor";
+      text = builtins.readFile ./scripts/toggle-monitor.sh;
+    };
+    duo-manage-monitors = pkgs.writeShellApplication {
+      name = "duo-manage-monitors";
+      text = builtins.readFile ./scripts/duo-manage-monitors.sh;
+    };
+    set-brightness = pkgs.writeShellApplication {
+      name = "set-brightness";
+      runtimeInputs = with pkgs; [
+        curl
+      ];
+      text = builtins.readFile ./scripts/set-brightness.sh;
+    };
   in
     with pkgs; [
       matlab
@@ -61,6 +71,7 @@
       get-kbd-connected
       toggle-monitor
       duo-manage-monitors
+      set-brightness
       brightnessctl
       wireshark
       pkgs-unstable.ciscoPacketTracer9
