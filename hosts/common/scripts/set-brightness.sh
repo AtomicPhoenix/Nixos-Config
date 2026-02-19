@@ -16,8 +16,8 @@ if ! [[ "$BRIGHTMOD" =~ ^[0-9]+%?[+-]?$ ]]; then
   usage
 fi
 
-brightnessctl -d intel_backlight s "$BRIGHTMOD"
-
-# Set bottom monitor brightness equal to top
-TOP_CURRENT="$(brightnessctl -d intel_backlight g)"
-brightnessctl -d card1-eDP-2-backlight s "$TOP_CURRENT"
+# Loop through each backlight device and set brightness
+BACKLIGHT_DEVICES=$(brightnessctl -l | grep "class 'backlight'" | awk -F"'" '{print $2}')
+for DEVICE in $BACKLIGHT_DEVICES; do
+  brightnessctl -d "$DEVICE" s "$BRIGHTMOD"
+done
