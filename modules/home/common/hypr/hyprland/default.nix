@@ -1,8 +1,8 @@
-_: {
+{pkgs-unstable, ...}: {
   wayland.windowManager.hyprland = {
     # Enable Hyprland wayland compositor
     enable = true;
-
+    package = pkgs-unstable.hyprland;
     # Whether to enable XWayland
     xwayland.enable = true;
 
