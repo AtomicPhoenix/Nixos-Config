@@ -28,8 +28,7 @@
   background: #000;
 }
 
-#clock,
-#custom-power {
+#clock {
   background-color: rgba(15, 27, 53, 0.9);
   margin-top: 6px;
   margin-right: 6px;
@@ -38,8 +37,7 @@
   border-width: 0px;
 }
 
-#network,
-#custom-lock {
+#network {
   background-color: rgba(15, 27, 53, 0.9);
   margin-top: 6px;
   margin-left: 6px;
@@ -48,7 +46,6 @@
   border-width: 0px;
 }
 
-#custom-reboot,
 #bluetooth,
 #battery,
 #pulseaudio,
@@ -76,9 +73,6 @@
 #memory:hover,
 #cpu:hover,
 #clock:hover,
-#custom-lock:hover,
-#custom-reboot:hover,
-#custom-power:hover,
 #window:hover {
   background-color: rgba(70, 75, 90, 0.9);
 }

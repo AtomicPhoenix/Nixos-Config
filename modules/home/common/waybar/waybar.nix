@@ -10,9 +10,6 @@
         "hyprland/workspaces"
         "systemd-failed-units"
         "tray"
-        "custom/lock"
-        "custom/reboot"
-        "custom/power"
       ];
       modules-center = ["hyprland/window"];
       modules-right = [
@@ -43,24 +40,6 @@
         "format-ok" = "✓";
         "system" = true; # Monitor failed systemwide units.
         "user" = true; # Ignore failed user units.
-      };
-      "custom/lock" = {
-        format = "<span color='#00FFFF'>  </span>";
-        "on-click" = "hyprlock";
-        "tooltip" = true;
-        "tooltip-format" = "Lock Screen";
-      };
-      "custom/reboot" = {
-        "format" = "<span color='#FFD700'>  </span>";
-        "on-click" = "systemctl reboot";
-        "tooltip" = true;
-        "tooltip-format" = "Reboot";
-      };
-      "custom/power" = {
-        "format" = "<span color='#FF4040'>  </span>";
-        "on-click" = "systemctl poweroff";
-        "tooltip" = true;
-        "tooltip-format" = "Shutdown";
       };
       "network" = {
         "format-wifi" = "<span color='#00FFFF'> 󰤨 </span>{essid} ";
