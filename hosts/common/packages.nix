@@ -1,16 +1,5 @@
-{
-  pkgs,
-  pkgs-unstable,
-  ...
-}: {
+{pkgs, ...}: {
   programs = {
-    hyprland = {
-      enable = true;
-      package = pkgs-unstable.hyprland;
-      # Sync portal package with hyprland package
-      portalPackage = pkgs-unstable.xdg-desktop-portal-hyprland;
-    };
-
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
