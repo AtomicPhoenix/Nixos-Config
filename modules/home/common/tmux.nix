@@ -1,8 +1,10 @@
 {pkgs, ...}: {
   programs.tmux = {
     enable = true;
-    prefix = "C-s";
+    prefix = "C-a";
     baseIndex = 1;
+    mouse = true; # Enable mouse support
+    keyMode = "vi"; # Use vi-style keybindings
     disableConfirmationPrompt = false;
     focusEvents = true;
     plugins = with pkgs; [
@@ -13,11 +15,6 @@
       {
         plugin = tmuxPlugins.vim-tmux-navigator;
         extraConfig = ''
-          set -g @vim_navigator_mapping_left "C-Left C-h"  # use C-h and C-Left
-          set -g @vim_navigator_mapping_right "C-Right C-l"
-          set -g @vim_navigator_mapping_up "C-k"
-          set -g @vim_navigator_mapping_down "C-j"
-          set -g @vim_navigator_mapping_prev ""  # Remove default C-\ binding
         '';
       }
       {
@@ -62,21 +59,11 @@
       }
     ];
     extraConfig = ''
-      # Reload tmux config command
-      bind r source-file ~/.config/tmux/tmux.conf \; display "Configuration Reloaded!"
-
-      # Split Panes
-      bind \\ split-window -h # Horizontal
-      bind - split-window -v  # Vertical
-
-      # Use Vi-style keybindings in copy mode.
-      setw -g mode-keys vi
+      # Make C-a C-a send C-a to terminal
+      bind C-a send-prefix
 
       # Hook to run fastfetch on session creation
-      set-hook -g after-new-session 'send-keys -R " clear && fastfetch" C-m'
-
-      # Enable mouse support
-      set -g mouse on
+      set-hook -g after-new-session 'send-keys -R "clear && fastfetch" C-m'
 
       # Ensure 256-color support
       set -g default-terminal "tmux-256color"
