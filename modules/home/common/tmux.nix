@@ -80,6 +80,9 @@
 
       # Ensure 256-color support
       set -g default-terminal "tmux-256color"
+
+      # Automatically renumber windows
+      set -g renumber-windows on
     '';
   };
 }
