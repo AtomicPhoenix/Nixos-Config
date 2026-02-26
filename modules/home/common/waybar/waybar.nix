@@ -23,6 +23,9 @@
         "cpu"
         "clock"
       ];
+      "hyprland/window" = {
+        max-length = 32;
+      };
       "hyprland/workspaces" = {
         format = "{icon}";
         on-click = "activate";
