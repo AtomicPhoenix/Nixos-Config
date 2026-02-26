@@ -11,6 +11,10 @@
   services.tailscale.enable = true;
 
   environment.systemPackages = let
+    import_env = pkgs.writeShellApplication {
+      name = "import_env";
+      text = builtins.readFile ./scripts/import_env.sh;
+    };
     load_tmux = (pkgs.writeScriptBin "load_tmux" ./scripts/load_tmux.sh).overrideAttrs (old: {
       buildCommand = "${old.buildCommand}\n patchShebangs $out";
     });
@@ -24,6 +28,7 @@
   in
     with pkgs; [
       # Self-defined packages
+      import_env
       load_tmux
       set-brightness
 

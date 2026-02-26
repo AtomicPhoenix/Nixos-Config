@@ -19,6 +19,8 @@
       "$mainMod" = "SUPER";
 
       exec-once = [
+        "import_env tmux"
+        "import_env system"
         "mako &"
         "waybar"
         "hyprpaper"
