@@ -21,8 +21,8 @@
         sudo nixos-rebuild switch --show-trace --flake ~/Nixos-Config/#"$host"
 
         # Optional per-host hook
-        if declare -F rebuild_post > /dev/null; then
-          rebuild_post
+        if declare -F post_rebuild > /dev/null; then
+          post_rebuild
         fi
       }
 
