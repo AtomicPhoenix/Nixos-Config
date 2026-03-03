@@ -1,4 +1,4 @@
-{...}: {
+_: {
   programs.hyprlock = {
     enable = true;
     settings = {
@@ -8,11 +8,7 @@
 
       # GENERAL
       general = {
-        no_fade_in = true;
-        no_fade_out = true;
         hide_cursor = false;
-        grace = 0;
-        disable_loading_bar = true;
         ignore_empty_input = true;
       };
 
@@ -55,7 +51,7 @@
         battery = {
           # monitor =
           text = "cmd[update:1000] echo \"$(cat /sys/class/power_supply/BAT0/capacity)%\"";
-          color = "$foregrkund";
+          color = "rgba(242, 243, 244, 1)";
           font_size = 24;
           font_family = "FiraCode Nerd Font";
           position = "-10, -10";
