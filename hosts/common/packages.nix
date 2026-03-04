@@ -95,6 +95,9 @@
 
       # Office Suite
       libreoffice
+
+      # XDG
+      xdg-utils
     ];
 
   nixpkgs.config.packageOverrides = pkgs: {
