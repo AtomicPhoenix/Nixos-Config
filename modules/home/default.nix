@@ -10,8 +10,6 @@
     ./git.nix
     ./hypr
     ./mpv.nix
-    ./nix-direnv.nix
-    ./proton.nix
     ./rofi.nix
     ./tmux.nix
     ./waybar/waybar.nix
