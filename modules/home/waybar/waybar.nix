@@ -52,6 +52,7 @@
         "format-disconnected" = "<span color='#FF4040'>   </span>Disconnected ";
         "format-alt" = "<span color='#00FFFF'> 󰤨 </span>{signalStrength}% ";
         "interval" = 1;
+        interface = "wlo1";
       };
       "battery" = {
         "states" = {
