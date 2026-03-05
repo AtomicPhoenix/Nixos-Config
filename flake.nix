@@ -66,7 +66,7 @@
             home-manager = {
               useGlobalPkgs = true; # Use nixos's pkgs value
               extraSpecialArgs = {inherit inputs pkgs-unstable;}; # Pass arguments to home modules
-              users.ai.imports = [./modules/home/${hostname}.nix];
+              users.ai.imports = [./modules/home];
             };
           }
         ];
