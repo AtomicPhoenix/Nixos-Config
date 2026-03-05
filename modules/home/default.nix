@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./alacritty.nix
     ./bash.nix
@@ -44,12 +48,21 @@
       GDK_BACKEND = "wayland,x11";
       QT_QPA_PLATFORM = "wayland;xcb";
 
-      #SDL_VIDEODRIVER = "x11";
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/ai/.steam/root/compatibilitytools.d";
       CLUTTER_BACKEND = "wayland";
       XDG_CURRENT_DESKTOP = "Hyprland";
       XDG_SESSION_TYPE = "wayland";
       XDG_SESSION_DESKTOP = "Hyprland";
       WLR_NO_HARDWARE_CURSORS = "1";
     };
+    packages = with pkgs; [
+      protonup-ng # Proton (For running games on Linux)
+    ];
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
   };
 }
