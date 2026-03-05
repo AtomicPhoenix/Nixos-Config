@@ -40,6 +40,7 @@
       vulkan-tools
       cemu
       dolphin-emu
+      protonup-ng
 
       # SSH protocol implementation
       openssh

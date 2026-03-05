@@ -53,9 +53,6 @@
       XDG_SESSION_DESKTOP = "Hyprland";
       WLR_NO_HARDWARE_CURSORS = "1";
     };
-    packages = with pkgs; [
-      protonup-ng # Proton (For running games on Linux)
-    ];
   };
 
   programs.direnv = {
