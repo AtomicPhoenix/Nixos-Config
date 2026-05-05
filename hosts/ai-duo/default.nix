@@ -17,6 +17,14 @@
   # Enable Bolt daemon for thunderbolt devices
   services.hardware.bolt.enable = true;
 
+  # Printing
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   # Optimizes battery life
   services.tlp.enable = true;
 
