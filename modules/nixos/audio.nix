@@ -1,9 +1,9 @@
-_: {
+{pkgs, ...}: {
   # RealtimeKit: A D-Bus system service that enables user processes to request realtime scheduling priority (for pipewire).
   security.rtkit.enable = true;
 
   # PulseAudio sound server
-  services.pulseaudio.enable = false;
+  services.pulseaudio.enable = false; # Use Pipewire, the modern sound subsystem
 
   # PipeWire
   services.pipewire = {
@@ -20,4 +20,13 @@ _: {
     # WirePlumber is a modular session / policy manager for PipeWire
     wireplumber.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    pulseaudio
+    alsa-utils
+    pavucontrol # PulseAudio Volume Control
+    pamixer # Command-line mixer for PulseAudio
+    bluez # Bluetooth support
+    bluez-tools # Bluetooth tools
+  ];
 }

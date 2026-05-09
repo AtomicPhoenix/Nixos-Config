@@ -8,6 +8,10 @@
     };
   };
 
+  programs.thunar.enable = true;
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
+
   services.tailscale.enable = true;
 
   environment.systemPackages = let
@@ -60,7 +64,7 @@
       # Misc. Apps
       spotify
       obsidian
-      clickup
+      # clickup
       discord
 
       # Screenshots
@@ -81,10 +85,6 @@
       tree
       feh
       btop
-
-      # Audio
-      alsa-utils
-      pavucontrol
 
       # Temperature Sensor
       lm_sensors # Hyprland
