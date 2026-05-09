@@ -23,6 +23,9 @@
     defaultApplications = {
       "text/html" = "firefox.desktop";
       "text/xml" = "firefox.desktop";
+      "image/png" = "feh.desktop";
+      "inode/directory" = "thunar.desktop";
+      "application/pdf" = "firefox.desktop";
       "application/xhtml+xml" = "firefox.desktop";
       "x-scheme-handler/ftp" = "firefox.desktop";
       "x-scheme-handler/http" = "firefox.desktop";
