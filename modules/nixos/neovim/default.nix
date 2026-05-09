@@ -1,10 +1,14 @@
-{lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   programs.nvf = {
     enable = true;
     # enableManpages = true;
     settings = {
       vim = lib.mkMerge [
-        (import ./plugins {inherit lib;})
+        (import ./plugins {inherit lib pkgs;})
         {
           utility.direnv.enable = true;
 
