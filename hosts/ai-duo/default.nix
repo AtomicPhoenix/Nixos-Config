@@ -108,9 +108,9 @@
         };
       };
 
-      ## Extend common bashrc located in ./common/bash.nix
+      ## Extend rebuild script function defined in ./modules/nixos/scripts/rebuild.sh
       bash.bashrcExtra = lib.mkAfter ''
-        ## Runs after rebuild command defined in ./common/bash.nix
+        ## Extend rebuild script function defined in ./modules/nixos/scripts/rebuild.sh
         function post_rebuild()  {
           toggle-monitor
         }
