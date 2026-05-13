@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Grab an existing unattached session, if there are any
 unattached_session="$(tmux ls | grep -v attached | head -1 | cut -d: -f1)"
 # If no existing unattached sessions, create a new one

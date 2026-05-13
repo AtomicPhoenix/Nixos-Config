@@ -19,9 +19,10 @@
       name = "import_env";
       text = builtins.readFile ./scripts/import_env.sh;
     };
-    load_tmux = (pkgs.writeScriptBin "load_tmux" ./scripts/load_tmux.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
+    load_tmux = pkgs.writeShellApplication {
+      name = "load_tmux";
+      text = builtins.readFile ./scripts/load_tmux.sh;
+    };
     set-brightness = pkgs.writeShellApplication {
       name = "set-brightness";
       runtimeInputs = with pkgs; [
@@ -29,12 +30,22 @@
       ];
       text = builtins.readFile ./scripts/set-brightness.sh;
     };
+    update = pkgs.writeShellApplication {
+      name = "update";
+      text = builtins.readFile ./scripts/update.sh;
+    };
+    rebuild = pkgs.writeShellApplication {
+      name = "rebuild";
+      text = builtins.readFile ./scripts/rebuild.sh;
+    };
   in
     with pkgs; [
       # Self-defined packages
       import_env
       load_tmux
       set-brightness
+      update
+      rebuild
 
       # VPN
       protonvpn-gui
