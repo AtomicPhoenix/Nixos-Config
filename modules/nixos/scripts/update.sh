@@ -38,7 +38,7 @@ fi
 
 auto_commit=0
 
-case "$1" in
+case "${1:-}" in
 --help)
         usage
         exit 0

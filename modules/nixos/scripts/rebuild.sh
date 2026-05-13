@@ -15,13 +15,13 @@ if [[ $# -gt 1 ]]; then
 	exit 1
 fi
 
-if [[ "$1" == "--help" ]]; then
+if [[ "${1:-}" == "--help" ]]; then
 	usage
 	exit 0
 fi
 
 # Determine which output attribute to rebuild with
-flakeAttr="$1"
+flakeAttr="${1:-}"
 
 if [[ -z "$flakeAttr" ]]; then
 	# Use hostname from system configuration as output attribute if unspecified
