@@ -33,6 +33,10 @@
       name = "update";
       text = builtins.readFile ./scripts/update.sh;
     };
+    rebuild = pkgs.writeShellApplication {
+      name = "rebuild";
+      text = builtins.readFile ./scripts/rebuild.sh;
+    };
   in
     with pkgs; [
       # Self-defined packages
@@ -40,6 +44,7 @@
       load_tmux
       set-brightness
       update
+      rebuild
 
       # VPN
       protonvpn-gui
