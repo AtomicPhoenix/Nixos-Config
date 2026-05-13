@@ -18,7 +18,6 @@
       efiSysMountPoint = "/boot"; # default /boot
     };
     systemd-boot = {
-      # enable = true; # enabled in ../common/boot.nix
       configurationLimit = 5;
       consoleMode = "max";
       windows = {
