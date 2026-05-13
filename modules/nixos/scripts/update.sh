@@ -59,18 +59,32 @@ esac
 # Move into repo
 cd ~/Nixos-Config || exit 1
 
-# Update Flake
-if ! nix flake update; then
-        printf "\033[31mERROR: \033[0mFailed to update system flake.\n"
+# Update Flake (and time update)
+SECONDS=0
+nix flake update
+SUCCESS=$?
+
+# Calculate time elapsed
+minutes=$((SECONDS / 60))
+seconds=$((SECONDS % 60))
+if ((minutes == 0)); then
+        elapsed_time="${minutes}m ${seconds}s"
+else
+        elapsed_time="${seconds}s"
+fi
+
+if ((SUCCESS == 0)); then
+        printf "\nSystem update succeeded in %s.\n" "$elapsed_time"
+else
+        printf "\n\033[31mERROR: \033[0mSystem update failed in %s.\n" "$elapsed_time"
         exit 1
 fi
 
 # Check if anything was updated
 if git diff --quiet flake.lock; then
-        echo "flake.lock unchanged."
+        echo "System flake is up-to-date; flake.lock was unchanged."
         exit 0
 fi
-echo 'Successfully updated system flake'
 
 # Commit update if user wants
 if [[ "$auto_commit" -eq 1 ]]; then
