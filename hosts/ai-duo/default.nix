@@ -63,6 +63,10 @@
       name = "duo-manage-monitors";
       text = builtins.readFile ./scripts/duo-manage-monitors.sh;
     };
+    post_rebuild = pkgs.writeShellApplication {
+      name = "post_rebuild";
+      text = builtins.readFile ./scripts/post_rebuild.sh;
+    };
   in
     with pkgs; [
       matlab
@@ -71,6 +75,7 @@
       get-kbd-connected
       toggle-monitor
       duo-manage-monitors
+      post_rebuild
       wireshark
       pkgs-unstable.ciscoPacketTracer9
     ];
@@ -107,14 +112,6 @@
           "worker-2" = standard_config "worker-2";
         };
       };
-
-      ## Extend rebuild script function defined in ./modules/nixos/scripts/rebuild.sh
-      bash.bashrcExtra = lib.mkAfter ''
-        ## Extend rebuild script function defined in ./modules/nixos/scripts/rebuild.sh
-        function post_rebuild()  {
-          toggle-monitor
-        }
-      '';
     };
 
     wayland.windowManager.hyprland.settings.exec-once = ["duo-manage-monitors"];
