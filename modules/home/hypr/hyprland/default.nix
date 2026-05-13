@@ -225,7 +225,7 @@
 
         # Toggle Waybar
         "$mainMod SHIFT, B, exec,  pkill waybar || waybar"
-        "$mainMod SHIFT, mouse:272, exec, mpv ~/Audio/VineBoom.mp3"
+        "$mainMod SHIFT, mouse:272, exec, mpv ~/Audio/SoundEffects/VineBoom.mp3"
         "$mainMod SHIFT, mouse:272, pass, class:firefox"
       ];
 
@@ -249,7 +249,7 @@
 
       # Repeating Binds
       binde = [
-        "$mainMod SHIFT, V, exec, mpv ~/Audio/VineBoom.mp3"
+        "$mainMod SHIFT, V, exec, mpv ~/Audio/SoundEffects/VineBoom.mp3"
 
         # Switch workspace with mainMod + arrow keys
         "$mainMod ALT, left, workspace, -1"
@@ -278,7 +278,7 @@
       ];
 
       bindc = [
-        "$mainMod SHIFT, V, exec, mpv ~/Audio/VineBoom.mp3"
+        "$mainMod SHIFT, V, exec, mpv ~/Audio/SoundEffects/VineBoom.mp3"
       ];
 
       # Mouse binds
