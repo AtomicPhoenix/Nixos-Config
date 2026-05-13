@@ -6,26 +6,11 @@
 
     bashrcExtra = ''
       eval "$(direnv hook bash)"
-
-      function rebuild()  {
-        # Get hostname and rebuild
-        if [[ -z $host ]]; then
-          host="$HOSTNAME"
-          printf "\033[0;33mWARNING: \033[0mNo hostname specified. Defaulting to using hostname (%s) for flake...\n" "$HOSTNAME"
-        else
-          host="$1"
-          printf "Using flake %s...\n" "$host"
-        fi
-        printf "System will be rebuilt using the selected flake (%s)\n" "$host"
-        printf " Rebuilding...\n\n"
-        sudo nixos-rebuild switch --show-trace --flake ~/Nixos-Config/#$host
-      }
     '';
 
     shellAliases = {
       ls = "ls --color=auto";
       grep = "grep --color=auto";
-      unzip = "function _unzip(){ FILE=$1; FILENAME=$(basename \"$\{FILE%.*}\"); nix run nixpkgs#unzip \"$FILE\" -- -d ./$FILENAME && echo \"Unzipped files to $PWD/$FILENAME\"; };_unzip";
     };
   };
 

@@ -1,16 +1,18 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
-    ./git.nix
     ./alacritty.nix
     ./bash.nix
-    ./nix-direnv.nix
     ./firefox.nix
+    ./git.nix
+    ./hypr
+    ./mpv.nix
     ./rofi.nix
     ./tmux.nix
-    ./mpv.nix
-    ./proton.nix
-    ./hyprland.nix
-    ./wayland.nix
+    ./waybar/waybar.nix
   ];
 
   /**
@@ -21,6 +23,9 @@
     defaultApplications = {
       "text/html" = "firefox.desktop";
       "text/xml" = "firefox.desktop";
+      "image/png" = "feh.desktop";
+      "inode/directory" = "thunar.desktop";
+      "application/pdf" = "firefox.desktop";
       "application/xhtml+xml" = "firefox.desktop";
       "x-scheme-handler/ftp" = "firefox.desktop";
       "x-scheme-handler/http" = "firefox.desktop";
@@ -40,5 +45,22 @@
     username = "ai";
     homeDirectory = lib.mkForce "/home/ai";
     stateVersion = "25.05";
+    sessionVariables = {
+      GDK_BACKEND = "wayland,x11";
+      QT_QPA_PLATFORM = "wayland;xcb";
+
+      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/ai/.steam/root/compatibilitytools.d";
+      CLUTTER_BACKEND = "wayland";
+      XDG_CURRENT_DESKTOP = "Hyprland";
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_DESKTOP = "Hyprland";
+      WLR_NO_HARDWARE_CURSORS = "1";
+    };
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
   };
 }

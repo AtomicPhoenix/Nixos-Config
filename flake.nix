@@ -2,7 +2,8 @@
   description = "A simple NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # sops-nix: Secret provisioning for NixOS based on sops
     sops-nix = {
@@ -21,7 +22,7 @@
 
     # Home-Manager, used for managing user configuration
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       # Inherits `inputs.nixpkgs` of current flake
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -33,16 +34,22 @@
 
   outputs = {
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     nvf,
     sops-nix,
     nix-matlab,
     ...
   } @ inputs: let
+    system = "x86_64-linux";
+    pkgs-unstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
     mkNixosConfiguration = hostname:
       nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;}; # Let submodules access inputs
-        system = "x86_64-linux";
+        specialArgs = {inherit inputs pkgs-unstable;}; # Let submodules access inputs and pkgs-unstable
+        inherit system;
         modules = [
           # Device configuration file
           ./hosts/${hostname}
@@ -58,8 +65,8 @@
           {
             home-manager = {
               useGlobalPkgs = true; # Use nixos's pkgs value
-              extraSpecialArgs = inputs; # Pass arguments to home modules
-              users.ai.imports = [./modules/home/${hostname}.nix];
+              extraSpecialArgs = {inherit inputs pkgs-unstable;}; # Pass arguments to home modules
+              users.ai.imports = [./modules/home];
             };
           }
         ];

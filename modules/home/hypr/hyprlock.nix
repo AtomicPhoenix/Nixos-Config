@@ -1,0 +1,68 @@
+_: {
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      background = {
+        path = "/home/ai/Pictures/Wallpapers/jjk_culling_games.png";
+      };
+
+      # GENERAL
+      general = {
+        hide_cursor = false;
+        ignore_empty_input = true;
+      };
+
+      # INPUT FIELD
+      input-field = {
+        size = "400, 50";
+        position = "0, 10";
+        dots_center = true;
+        fade_on_empty = false;
+        font_family = "FiraCode Nerd Font";
+        font_color = "rgb(202, 211, 245)";
+        inner_color = "rgb(91, 96, 120)";
+        outer_color = "rgb(24, 25, 38)";
+        outline_thickness = 5;
+        placeholder_text = "Password...";
+        shadow_passes = 2;
+      };
+
+      label = let
+        date = {
+          text = "cmd[update:1000] echo \"$(date +\"%A, %B %d\")\"";
+          color = "rgba(242, 243, 244, 1)";
+          font_size = 22;
+          font_family = "FiraCode Nerd Font";
+          position = "0, 300";
+          halign = "center";
+          valign = "center";
+        };
+
+        time = {
+          text = "cmd[update:1000] echo \"$(date +\"%-I:%M\")\"";
+          color = "rgba(242, 243, 244, 1)";
+          font_size = 95;
+          font_family = "FiraCode Nerd Font";
+          position = "0, 200";
+          halign = "center";
+          valign = "center";
+        };
+
+        battery = {
+          # monitor =
+          text = "cmd[update:1000] echo \"$(cat /sys/class/power_supply/BAT0/capacity)%\"";
+          color = "rgba(242, 243, 244, 1)";
+          font_size = 24;
+          font_family = "FiraCode Nerd Font";
+          position = "-10, -10";
+          halign = "right";
+          valign = "top";
+        };
+      in [
+        date
+        time
+        battery
+      ];
+    };
+  };
+}

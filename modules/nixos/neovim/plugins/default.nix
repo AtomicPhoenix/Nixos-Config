@@ -1,4 +1,8 @@
-{lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   startPlugins = [
     "plenary-nvim"
   ];
@@ -19,7 +23,15 @@
   autocomplete.nvim-cmp = import ./nvim-cmp.nix;
 
   # telescope
-  telescope.enable = true;
+  telescope = {
+    enable = true;
+    extensions = [
+      {
+        name = "file_browser";
+        packages = [pkgs.vimPlugins.telescope-file-browser-nvim];
+      }
+    ];
+  };
 
   # "folke/which-key.nvim": Shows pending keybinds
   binds.whichKey = import ./which-key.nix;

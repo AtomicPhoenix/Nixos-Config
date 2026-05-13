@@ -1,14 +1,12 @@
-{pkgs, ...}: {
+{pkgs-unstable, ...}: {
   wayland.windowManager.hyprland = {
-    # Whether to enable Hyprland wayland compositor
+    # Enable Hyprland wayland compositor
     enable = true;
-    # The hyprland package to use
-    package = pkgs.hyprland;
+    package = pkgs-unstable.hyprland;
     # Whether to enable XWayland
     xwayland.enable = true;
 
-    # Optional
-    # Whether to enable hyprland-session.target on hyprland startup
+    # Enable hyprland-session.target on hyprland startup
     systemd.enable = true;
 
     settings = {
@@ -16,14 +14,13 @@
         "eDP-1, 2880x1800@120.0Hz, 0x0, 2"
         "eDP-2, 2880x1800@120.0Hz, 0x900, 2"
       ];
-      "$terminal" = "alacritty";
-      "$fileManager" = "thunar";
-      "$menu" = "rofi -show || (pkill rofi && rofi -show)";
-      "$webBrowser" = "firefox";
 
-      "$mainMod" = "SUPER"; # Sets "Windows" key as main modifier
+      # Sets "Windows" key as main modifier
+      "$mainMod" = "SUPER";
 
       exec-once = [
+        "import_env tmux"
+        "import_env system"
         "mako &"
         "waybar"
         "hyprpaper"
@@ -31,6 +28,7 @@
         "clickup"
         "discord"
         "sudo btmgmt le on"
+        "systemctl --user start hyprpolkitagent"
       ];
 
       env = [
@@ -39,7 +37,7 @@
       ];
 
       general = {
-        gaps_in = 2;
+        gaps_in = 0;
         gaps_out = 4;
 
         border_size = 1;
@@ -109,8 +107,9 @@
 
       # https://wiki.hyprland.org/Configuring/Variables/#misc
       misc = {
-        force_default_wallpaper = -1; # Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background. :(
+        force_default_wallpaper = 1; # Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo = false; # If true disables the random hyprland logo / anime girl background
+        disable_splash_rendering = true; # Disable default wallpaper & splash text
       };
 
       #############
@@ -134,11 +133,6 @@
         };
       };
 
-      # https://wiki.hyprland.org/Configuring/Variables/#gestures
-      gestures = {
-        workspace_swipe = false;
-      };
-
       # Example per-device config
       # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
       device = {
@@ -160,17 +154,18 @@
       "$obsidianIcon" = "~/Pictures/Icons/obsidian.png";
 
       bind = [
-        # Application Shortcuts
-        "$mainMod, RETURN, exec, $terminal"
-        "$mainMod, Q, killactive,"
-        "$mainMod, M, exec, hyprlock"
-        "$mainMod, F, exec, $webBrowser"
-        "$mainMod, V, togglefloating,"
-        "$mainMod, D, exec, $menu"
-        "$mainMod, P, pseudo, # dwindle"
-        #bind = $mainMod, J, togglesplit, # dwindle
+        # Window Dispatchers
+        "$mainMod, P, pseudo," # Toggle dwindle's psuedotile mode
+        "$mainMod, Q, killactive," # Kill active window
+        "$mainMod, V, togglefloating," # Toggle floating window mode
 
-        # More aforementioned application shortcuts
+        # Application Shortcuts
+        "$mainMod,       RETURN, exec, alacritty -e load_tmux"
+        "$mainMod SHIFT, RETURN, exec, alacritty"
+        "$mainMod, M, exec, hyprlock" # Lock Screen
+        "$mainMod, F, exec, firefox"
+        "$mainMod, D, exec, rofi -show || (pkill rofi && rofi -show)" # Open Rofi Menu
+
         "$mainMod CTRL, S, exec, (hyprctl dispatch focuswindow class:spotify  | grep ok)  || (notify-send -i $spotifyIcon  'Starting Spotify'  && spotify  $useWayland)"
         "$mainMod CTRL, D, exec, (hyprctl dispatch focuswindow class:discord  | grep ok)  || (notify-send -i $discordIcon  'Starting Discord'  && discord  $useWayland)"
         "$mainMod CTRL, C, exec, (hyprctl dispatch focuswindow class:ClickUp  | grep ok)  || (notify-send -i $clickUpIcon  'Starting Clickup'  && clickup  $useWayland)"
@@ -234,12 +229,13 @@
         "$mainMod SHIFT, mouse:272, pass, class:firefox"
       ];
 
+      # Repating Binds that will also work in a lock screen
       bindel = [
         # Audio Settings
+        ", XF86AudioMute, exec, amixer set Master toggle"
         ", XF86AudioLowerVolume, exec, amixer set Master 5%-"
         ", XF86AudioRaiseVolume, exec, amixer set Master 5%+"
-        ", XF86AudioMute, exec, amixer set Master toggle"
-        " ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
 
         ", F1, exec, amixer set Master toggle"
         ", F2, exec, amixer set Master 5%-"
@@ -247,19 +243,15 @@
         ", F7, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
 
         # Brightness Settings
-        " ,XF86MonBrightnessUp, exec, brightnessctl -d intel_backlight s 10%+ && brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)"
-        " ,XF86MonBrightnessDown, exec, brightnessctl -d intel_backlight s 10%- &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)"
-        " ,XF86KbdBrightnessUp, exec, brightnessctl -d asus::kbd_backlight s 1+"
-        " ,XF86KbdBrightnessDown, exec, brightnessctl -d asus::kbd_backlight s 1-"
-
-        " ,F5, exec, brightnessctl -d intel_backlight s 10%-"
-        " ,F6, exec, brightnessctl -d intel_backlight s 10%+"
+        ", F5, exec, set-brightness 5%-"
+        ", F6, exec, set-brightness 5%+"
       ];
 
       # Repeating Binds
       binde = [
         "$mainMod SHIFT, V, exec, mpv ~/Audio/VineBoom.mp3"
-        # Move focus with mainMod + arrow keys
+
+        # Switch workspace with mainMod + arrow keys
         "$mainMod ALT, left, workspace, -1"
         "$mainMod ALT, right, workspace, +1"
         "$mainMod ALT, p, workspace, previous"
@@ -269,9 +261,6 @@
         "$mainMod SHIFT, right, resizeactive,  40 0"
         "$mainMod SHIFT, down, resizeactive,  0  40"
         "$mainMod SHIFT, up, resizeactive,  0  -40"
-
-        # Lock Screen
-        "$mainMod SHIFT, L, exec, hyprlock"
 
         # Move Windows with mainMod + ctrl + arrow keys
         "$mainMod CTRL, left, movewindow, l"
@@ -283,9 +272,9 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
 
-        # Additional Mouse Buttons
-        ", mouse:276, exec, RaiseVolume.sh"
-        ", mouse:275, exec, LowerVolume.sh"
+        # Raise/lower windows with mouse side buttons
+        ", mouse:276, exec, amixer set Master 5%+"
+        ", mouse:275, exec, amixer set Master 5%-"
       ];
 
       bindc = [
@@ -299,88 +288,7 @@
         "$mainMod, mouse:273, resizewindow"
       ];
 
-      # Connect Mouse
-      # bind = $mainMod SHIFT, B, exec, /usr/bin/BT5MouseConnect.sh
-
-      ##############################
-      ### WINDOWS AND WORKSPACES ###
-      ##############################
-
-      # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-      # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
-
-      # Example windowrule v1
-      # windowrule = float, ^(kitty)$
-
-      windowrule = [
-        "float, class: blueman-manager"
-        "size 60% 60%, class: blueman-manager"
-        "float, class: [Tt]hunar"
-        "size 60% 60%, class: [Tt]hunar"
-        "float, class: xdg-desktop-portal-gtk"
-        "size 60% 60%, class: xdg-desktop-portal-gtk"
-        "float, class: nm-connection-editor"
-        "size 40% 40%, class: nm-connection-editor"
-        # windowrule = float,class:^(kitty)$,title:^(kitty)$
-        "pin,class:mpv"
-        "size 40% 40%,class:mpv"
-        "opacity 1.0 override 1.0 override 1.0 override, class:mpv"
-
-        "float,class:mpv"
-        "pin,class:firefox,initialTitle:^Picture.*$ "
-        "size 40% 40%,class:firefox,initialTitle:^Picture.*$ "
-        "float,class:firefox,initialTitle:^Picture.*$ "
-
-        "workspace 11, initialTitle:^(Discord)(.*)$"
-        "monitor 1, initialTitle:^(Discord)(.*)$"
-
-        "workspace 12, initialTitle:^(Spotify)(.*)$"
-        "monitor 1, initialTitle:^(Spotify)(.*)$"
-
-        "workspace 13, initialTitle:^(ClickUp)(.*)$"
-        "monitor 1, initialTitle:^(ClickUp)(.*)$"
-
-        "workspace 14, class:obsidian"
-        "monitor 1, class:obsidian"
-
-        "suppressevent maximize, class:.* # You'll probably like this."
-      ];
-    };
-  };
-  services.hypridle = {
-    enable = true;
-    settings = {
-      # General settings for what to do when certain global events / signals occur (e.g. lock_cmd runs when a lock signal is heard)
-      general = {
-        lock_cmd = "pidof hyprlock || hyprlock;"; # avoid starting multiple hyprlock instances.
-        unlock_cmd = "pkill hyprlock;";
-        before_sleep_cmd = "hyprlock;";
-        after_sleep_cmd = "hyprctl dispatch dpms on; nmcli radio wifi on; brightnessctl -d intel_backlight s 100% &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)"; # to avoid having to press a key twice to turn on the display.
-        ignore_dbus_inhibit = false; # Don't dbus-sent idle-inhibit requests (used by e.g. firefox or steam)
-        ignore_systemd_inhibit = false; # Don't ignore systemd-inhibit --what=idle inhibitors
-        ignore_wayland_inhibit = false; # Don't ignore wayland protocol inhibition requests (e.g. from running video players)
-      };
-      listener = [
-        {
-          timeout = 120;
-          on-timeout = "brightnessctl -d intel_backlight s 30% &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)";
-          on-resume = "brightnessctl -d intel_backlight s 100% &&  brightnessctl -d card1-eDP-2-backlight s $(brightnessctl -d intel_backlight g)";
-        }
-        {
-          timeout = 240;
-          on-timeout = "loginctl lock-session;";
-          on-resume = "hyprctl dispatch dpms on";
-        }
-        {
-          timeout = 300;
-          on-timeout = "systemd-ac-power || hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
-        }
-        {
-          timeout = 600;
-          on-timeout = "loginctl suspend";
-        }
-      ];
+      windowrule = import ./windowrules.nix;
     };
   };
 }

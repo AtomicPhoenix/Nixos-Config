@@ -2,13 +2,13 @@
 {
   pkgs,
   inputs,
+  pkgs-unstable,
+  lib,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # Include common configuration
-    ../common
   ];
 
   # Define hostname.
@@ -17,33 +17,52 @@
   # Enable Bolt daemon for thunderbolt devices
   services.hardware.bolt.enable = true;
 
+  # Printing
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  # Optimizes battery life
+  services.tlp.enable = true;
+
   hardware = {
     # Support IIO sensors with iio-sensor-proxy.
     # Accelerometer for laptop
     sensor.iio.enable = true;
 
     graphics = {
+      enable = true;
       # Add packages to the default graphics driver lookup path.
       extraPackages = with pkgs; [
+        vpl-gpu-rt
+        mesa
         intel-media-driver
-        vaapiIntel
-        vaapiVdpau
+        intel-vaapi-driver
+        libva-vdpau-driver
         libvdpau-va-gl
       ];
     };
   };
+
+  # Add matlab packages
   nixpkgs.overlays = [inputs.nix-matlab.overlay];
 
   environment.systemPackages = let
-    get-kbd-connected = (pkgs.writeScriptBin "get-kbd-connected" ./scripts/get-kbd-connected.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
-    toggle-monitor = (pkgs.writeScriptBin "toggle-monitor" ./scripts/toggle-monitor.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
-    duo-manage-monitors = (pkgs.writeScriptBin "duo-manage-monitors" ./scripts/duo-manage-monitors.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
+    get-kbd-connected = pkgs.writeShellApplication {
+      name = "get-kbd-connected";
+      text = builtins.readFile ./scripts/get-kbd-connected.sh;
+    };
+    toggle-monitor = pkgs.writeShellApplication {
+      name = "toggle-monitor";
+      text = builtins.readFile ./scripts/toggle-monitor.sh;
+    };
+    duo-manage-monitors = pkgs.writeShellApplication {
+      name = "duo-manage-monitors";
+      text = builtins.readFile ./scripts/duo-manage-monitors.sh;
+    };
   in
     with pkgs; [
       matlab
@@ -52,12 +71,54 @@
       get-kbd-connected
       toggle-monitor
       duo-manage-monitors
-      brightnessctl
+      wireshark
+      pkgs-unstable.ciscoPacketTracer9
     ];
 
-  users.users.ai.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGdhbEfOlA2Q4y1OHY4MdFOkcQpuZzJKaPxqFFsyngHM ai@ai-desk"
-  ];
+  users.users.ai = {
+    extraGroups = ["wireshark"];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGdhbEfOlA2Q4y1OHY4MdFOkcQpuZzJKaPxqFFsyngHM ai@ai-desk"
+    ];
+  };
+
+  home-manager.users.ai = {
+    programs = {
+      ssh = let
+        standard_config = hostname: {
+          inherit hostname;
+          identityFile = ["~/.ssh/ai-duo-personal"];
+          port = 8102;
+        };
+      in {
+        enable = true;
+        enableDefaultConfig = false;
+        matchBlocks = {
+          "github.com" = {
+            hostname = "github.com";
+            identityFile = ["~/.ssh/ai-duo-github"];
+          };
+
+          "ai-desk" = standard_config "ai-desk";
+
+          # Cluster Nodes
+          "master" = standard_config "master";
+          "worker" = standard_config "worker";
+          "worker-2" = standard_config "worker-2";
+        };
+      };
+
+      ## Extend rebuild script function defined in ./modules/nixos/scripts/rebuild.sh
+      bash.bashrcExtra = lib.mkAfter ''
+        ## Extend rebuild script function defined in ./modules/nixos/scripts/rebuild.sh
+        function post_rebuild()  {
+          toggle-monitor
+        }
+      '';
+    };
+
+    wayland.windowManager.hyprland.settings.exec-once = ["duo-manage-monitors"];
+  };
 
   # NixOS release to use (See man configuration.nix or https://nixos.org/nixos/options.html)
   # This value does not affect the Nixpkgs version your packages and OS are pulled from, so changing it will not upgrade your system.)

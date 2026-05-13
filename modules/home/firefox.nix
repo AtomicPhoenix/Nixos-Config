@@ -7,7 +7,7 @@ _: {
         isDefault = true; # Implied by id = 0 but I'm including it anyways
         name = "ai-primary"; # Name listed in about:profiles
         settings = {
-          # "browser.startup.homepage" = "https://duckduckgo.com";
+          "browser.startup.homepage" = "https://duckduckgo.com";
           "browser.search.defaultenginename" = "ddg";
           "browser.search.order.1" = "ddg";
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
@@ -17,6 +17,7 @@ _: {
           default = "ddg";
           order = ["ddg" "google"];
         };
+        # Highlight active tab with white bottom border
         userChrome = ''
           #tabbrowser-tabs tab.tabbrowser-tab[selected="true"], #tabbrowser-tabs tab.tabbrowser-tab[multiselected="true"] {border-bottom: 2px solid White !important;}
         '';
@@ -48,17 +49,6 @@ _: {
           private_browsing = true;
         };
       };
-
-      /*
-      ---- PREFERENCES ----
-      */
-      # Check about:config for options.
-      # Preferences = {
-      #   "toolkit.legacyUserProfileCustomizations.stylesheets" = {
-      #     Value = "true";
-      #     Status = "locked";
-      #   };
-      # };
     };
   };
 }

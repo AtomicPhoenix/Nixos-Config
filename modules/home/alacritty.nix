@@ -5,6 +5,13 @@
     enable = true;
     # custom settings
     settings = {
+      window = {
+        opacity = 0.9;
+        padding = {
+          x = 4;
+          y = 2;
+        };
+      };
       env.TERM = "xterm-256color";
       colors = {
         draw_bold_text_with_bright_colors = true;
@@ -18,7 +25,6 @@
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
-      terminal.shell.program = "/home/ai/Documents/Scripts/loadTmux.sh";
     };
   };
 }
