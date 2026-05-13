@@ -29,12 +29,17 @@
       ];
       text = builtins.readFile ./scripts/set-brightness.sh;
     };
+    update = pkgs.writeShellApplication {
+      name = "update";
+      text = builtins.readFile ./scripts/update.sh;
+    };
   in
     with pkgs; [
       # Self-defined packages
       import_env
       load_tmux
       set-brightness
+      update
 
       # VPN
       protonvpn-gui

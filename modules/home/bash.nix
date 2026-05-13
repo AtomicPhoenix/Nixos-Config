@@ -25,10 +25,6 @@
           post_rebuild
         fi
       }
-
-      function update() {
-       (cd ~/Nixos-Config && sudo nix flake update) || echo 'Failed to update system flake';
-      }
     '';
 
     shellAliases = {
