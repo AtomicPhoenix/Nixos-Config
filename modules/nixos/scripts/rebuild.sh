@@ -55,7 +55,11 @@ SUCCESS=$?
 
 minutes=$((SECONDS / 60))
 seconds=$((SECONDS % 60))
-elapsed_time="${minutes}m ${seconds}s"
+if ((minutes == 0)); then
+	elapsed_time="${seconds}s"
+else
+	elapsed_time="${minutes}m ${seconds}s"
+fi
 
 if ((SUCCESS == 0)); then
 	printf "\nRebuild succeeded in %s.\n" "$elapsed_time"

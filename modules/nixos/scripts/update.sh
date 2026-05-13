@@ -68,9 +68,9 @@ SUCCESS=$?
 minutes=$((SECONDS / 60))
 seconds=$((SECONDS % 60))
 if ((minutes == 0)); then
-        elapsed_time="${minutes}m ${seconds}s"
-else
         elapsed_time="${seconds}s"
+else
+        elapsed_time="${minutes}m ${seconds}s"
 fi
 
 if ((SUCCESS == 0)); then
