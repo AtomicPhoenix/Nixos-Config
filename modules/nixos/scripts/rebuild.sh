@@ -69,7 +69,7 @@ else
 fi
 
 # Optional per-host hook
-if declare -F post_rebuild >/dev/null; then
+if command -v post_rebuild >/dev/null 2>&1; then
 	echo "Running post rebuild hook..."
 	post_rebuild
 fi
