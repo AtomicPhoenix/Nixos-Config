@@ -19,9 +19,10 @@
       name = "import_env";
       text = builtins.readFile ./scripts/import_env.sh;
     };
-    load_tmux = (pkgs.writeScriptBin "load_tmux" ./scripts/load_tmux.sh).overrideAttrs (old: {
-      buildCommand = "${old.buildCommand}\n patchShebangs $out";
-    });
+    load_tmux = pkgs.writeShellApplication {
+      name = "load_tmux";
+      text = builtins.readFile ./scripts/load_tmux.sh;
+    };
     set-brightness = pkgs.writeShellApplication {
       name = "set-brightness";
       runtimeInputs = with pkgs; [
