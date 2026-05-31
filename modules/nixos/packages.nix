@@ -14,6 +14,36 @@
 
   services.tailscale.enable = true;
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    nspr
+    nss
+    glib
+    mesa
+
+    zlib
+    stdenv.cc.cc
+
+    # xorg packages
+    libX11
+    libXcomposite
+    libXdamage
+    libXext
+    libXfixes
+    libXrandr
+    libxcb
+
+    atk
+    at-spi2-atk
+    cairo
+    cups
+    dbus
+    expat
+    libdrm
+    pango
+    gtk3
+  ];
+
   environment.systemPackages = let
     import_env = pkgs.writeShellApplication {
       name = "import_env";
@@ -48,10 +78,10 @@
       rebuild
 
       # VPN
-      protonvpn-gui
+      proton-vpn
 
       # Games
-      lutris
+      # lutris
       vulkan-tools
       cemu
       dolphin-emu
@@ -110,16 +140,23 @@
 
       # XDG
       xdg-utils
+
+      (mpv.override {
+        scripts = [
+          mpvScripts.uosc
+          mpvScripts.sponsorblock
+        ];
+      })
     ];
 
   nixpkgs.config.packageOverrides = pkgs: {
     steam = pkgs.steam.override {
       extraPkgs = pkgs:
         with pkgs; [
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXScrnSaver
+          libXcursor
+          libXi
+          libXinerama
+          libXScrnSaver
           libpng
           libpulseaudio
           libvorbis

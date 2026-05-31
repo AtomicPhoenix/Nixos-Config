@@ -9,7 +9,6 @@
     ./firefox.nix
     ./git.nix
     ./hypr
-    ./mpv.nix
     ./rofi.nix
     ./tmux.nix
     ./waybar/waybar.nix

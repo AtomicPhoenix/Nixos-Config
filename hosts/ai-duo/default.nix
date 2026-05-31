@@ -47,9 +47,6 @@
     };
   };
 
-  # Add matlab packages
-  nixpkgs.overlays = [inputs.nix-matlab.overlay];
-
   environment.systemPackages = let
     get-kbd-connected = pkgs.writeShellApplication {
       name = "get-kbd-connected";
@@ -69,7 +66,6 @@
     };
   in
     with pkgs; [
-      matlab
       inotify-tools
       usbutils
       get-kbd-connected
@@ -112,6 +108,7 @@
           "worker-2" = standard_config "worker-2";
         };
       };
+      waybar.settings.mainBar.network.interface = "wlo1";
     };
 
     wayland.windowManager.hyprland.settings.exec-once = ["duo-manage-monitors"];

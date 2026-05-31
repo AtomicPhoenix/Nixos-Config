@@ -1,5 +1,7 @@
 {pkgs-unstable, ...}: {
   wayland.windowManager.hyprland = {
+    configType = "hyprlang";
+
     # Enable Hyprland wayland compositor
     enable = true;
     package = pkgs-unstable.hyprland;
@@ -96,7 +98,7 @@
 
       # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
       dwindle = {
-        pseudotile = true; # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
+        # pseudotile = true; # Master switch for pseudotiling. Enabling is bound to mainMod + P in the keybinds section below
         preserve_split = true; # You probably want this
       };
 

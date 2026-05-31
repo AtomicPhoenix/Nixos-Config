@@ -18,25 +18,25 @@
     name = "Discord";
     "match:initial_class" = "discord";
     workspace = "11 silent";
-    monitor = 1;
+    monitor = 0;
   }
   {
     name = "Spotify";
     "match:initial_class" = "spotify";
     workspace = "12 silent";
-    monitor = 1;
+    monitor = 0;
   }
   {
     name = "ClickUp";
     "match:initial_class" = "ClickUp";
     workspace = "13 silent";
-    monitor = 1;
+    monitor = 0;
   }
   {
     name = "Obsidian";
     "match:initial_class" = "obsidian";
     workspace = "14";
-    monitor = 1;
+    monitor = 0;
   }
   {
     name = "ProtonVPN";

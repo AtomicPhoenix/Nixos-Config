@@ -2,7 +2,7 @@
   description = "A simple NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # sops-nix: Secret provisioning for NixOS based on sops
@@ -22,13 +22,9 @@
 
     # Home-Manager, used for managing user configuration
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       # Inherits `inputs.nixpkgs` of current flake
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-matlab = {
-      url = "gitlab:doronbehar/nix-matlab";
     };
   };
 
@@ -38,7 +34,6 @@
     home-manager,
     nvf,
     sops-nix,
-    nix-matlab,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -57,6 +52,7 @@
           # NixOS Modules
           nvf.nixosModules.default
           sops-nix.nixosModules.sops
+
           # NIXOS Modules Configuration
           ./modules/nixos
 
