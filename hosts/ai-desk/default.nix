@@ -67,6 +67,8 @@
       waybar.settings.mainBar.network.interface = "wlp11s0";
     };
   };
+  services.lact.enable = true;
+  hardware.amdgpu.overdrive.enable = true;
 
   # NixOS release to use (See man configuration.nix or https://nixos.org/nixos/options.html)
   # This value does not affect the Nixpkgs version your packages and OS are pulled from, so changing it will not upgrade your system.)
