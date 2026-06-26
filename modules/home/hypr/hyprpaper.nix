@@ -1,9 +1,8 @@
-{pkgs-unstable, ...}: {
+_: {
   services.hyprpaper = {
     enable = true;
-    package = pkgs-unstable.hyprpaper;
     settings = {
-      ipc = false;
+      ipc = true;
       splash = false;
 
       wallpaper = {
