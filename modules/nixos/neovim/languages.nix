@@ -16,7 +16,7 @@ in {
   bash = enableLanguage;
   clang = enableLanguage;
   html.enable = true;
-  css = enableLanguage // {format.type = ["prettierd"];};
-  typescript = enableLanguage // {format.type = ["prettierd"];};
+  css = enableLanguage;
+  typescript = enableLanguage;
   markdown = enableLanguage // {extensions.render-markdown-nvim.enable = true;};
 }
