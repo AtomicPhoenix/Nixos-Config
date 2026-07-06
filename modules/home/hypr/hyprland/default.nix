@@ -229,6 +229,11 @@
         "$mainMod SHIFT, B, exec,  pkill waybar || waybar"
       ];
 
+      # Binds that will also work in a lock screen
+      bindl = [
+        "$mainMod SHIFT, M, exec, systemctl suspend" # Lock screen and put to sleep
+      ];
+
       # Repating Binds that will also work in a lock screen
       bindel = [
         # Audio Settings
