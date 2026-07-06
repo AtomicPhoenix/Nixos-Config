@@ -26,6 +26,12 @@
       # Inherits `inputs.nixpkgs` of current flake
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Nix flake for the Eden Nintendo Switch emulator.
+    eden = {
+      url = "github:Daaboulex/eden-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -45,6 +51,7 @@
       nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs pkgs-unstable;}; # Let submodules access inputs and pkgs-unstable
         inherit system;
+
         modules = [
           # Device configuration file
           ./hosts/${hostname}
@@ -52,6 +59,7 @@
           # NixOS Modules
           nvf.nixosModules.default
           sops-nix.nixosModules.sops
+          inputs.eden.nixosModules.default
 
           # NIXOS Modules Configuration
           ./modules/nixos
