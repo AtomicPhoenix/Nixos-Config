@@ -85,27 +85,30 @@
 
   home-manager.users.ai = {
     programs = {
-      ssh = let
-        standard_config = hostname: {
-          inherit hostname;
-          identityFile = ["~/.ssh/ai-duo-personal"];
-          port = 8102;
-        };
-      in {
+      ssh = {
         enable = true;
-        enableDefaultConfig = false;
-        matchBlocks = {
+        settings = {
           "github.com" = {
-            hostname = "github.com";
-            identityFile = ["~/.ssh/ai-duo-github"];
+            HostName = "github.com";
+            IdentityFile = "~/.ssh/ai-duo-github";
           };
-
-          "ai-desk" = standard_config "ai-desk";
-
-          # Cluster Nodes
-          "master" = standard_config "master";
-          "worker" = standard_config "worker";
-          "worker-2" = standard_config "worker-2";
+          "ai-desk" = {
+            HostName = "ai-desk";
+            IdentityFile = "~/.ssh/ai-duo";
+            port = 8102;
+          };
+          "*" = {
+            ForwardAgent = false;
+            AddKeysToAgent = "no";
+            Compression = false;
+            ServerAliveInterval = 0;
+            ServerAliveCountMax = 3;
+            HashKnownHosts = false;
+            UserKnownHostsFile = "~/.ssh/known_hosts";
+            ControlMaster = "no";
+            ControlPath = "~/.ssh/master-%r@%n:%p";
+            ControlPersist = "no";
+          };
         };
       };
       waybar.settings.mainBar.network.interface = "wlo1";
