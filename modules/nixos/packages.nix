@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
   programs = {
     steam = {
       enable = true;
@@ -16,6 +21,8 @@
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
+    libkrb5
+    krb5
     nspr
     nss
     glib
@@ -24,24 +31,36 @@
     zlib
     stdenv.cc.cc
 
-    # xorg packages
+    # X11
     libX11
-    libXcomposite
-    libXdamage
+    libXcursor
+    libXi
+    libXinerama
+    libXrandr
+    libXrender
     libXext
     libXfixes
-    libXrandr
+    libXcomposite
+    libXdamage
+    libXxf86vm
     libxcb
 
+    # Input/keyboard
+    libxkbcommon
+
+    # Graphics
+    libGL
+    libdrm
+
+    # GTK deps
     atk
     at-spi2-atk
     cairo
-    cups
-    dbus
-    expat
-    libdrm
     pango
     gtk3
+    dbus
+    expat
+    cups
   ];
 
   environment.systemPackages = let
@@ -82,6 +101,7 @@
 
       # Games
       # lutris
+      appimage-run
       vulkan-tools
       cemu
       dolphin-emu
@@ -141,6 +161,12 @@
       # XDG
       xdg-utils
 
+      # File Manager for GDK Apps
+      zenity
+
+      qbittorrent
+      gamescope
+
       (mpv.override {
         scripts = [
           mpvScripts.uosc
@@ -148,6 +174,14 @@
         ];
       })
     ];
+
+  nixpkgs.overlays = [
+    inputs.eden.overlays.default
+  ];
+
+  programs.eden = {
+    enable = true;
+  };
 
   nixpkgs.config.packageOverrides = pkgs: {
     steam = pkgs.steam.override {
