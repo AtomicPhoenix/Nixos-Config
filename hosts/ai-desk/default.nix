@@ -55,6 +55,11 @@
             IdentityFile = "~/.ssh/ai-desk-personal";
             port = 8102;
           };
+          "ai-zen" = {
+            HostName = "ai-zen";
+            IdentityFile = "~/.ssh/ai-desk-personal";
+            port = 8102;
+          };
           "*" = {
             ForwardAgent = false;
             AddKeysToAgent = "no";
