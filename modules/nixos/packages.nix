@@ -142,7 +142,7 @@
       # Terminal
       fastfetch
       tmux
-      alacritty
+      kitty # Hyperland default
       tree
       feh
       btop

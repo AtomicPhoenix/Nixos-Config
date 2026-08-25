@@ -1,17 +1,14 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{lib, ...}: {
   imports = [
-    ./alacritty.nix
     ./bash.nix
     ./firefox.nix
     ./git.nix
+    ./ghostty.nix
     ./hypr
     ./rofi.nix
     ./tmux.nix
     ./waybar/waybar.nix
+    ./yazi.nix
   ];
 
   /**

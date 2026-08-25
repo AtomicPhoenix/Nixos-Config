@@ -162,8 +162,8 @@
         "$mainMod, V, togglefloating," # Toggle floating window mode
 
         # Application Shortcuts
-        "$mainMod,       RETURN, exec, alacritty -e load_tmux"
-        "$mainMod SHIFT, RETURN, exec, alacritty"
+        "$mainMod,       RETURN, exec, ghostty -e load_tmux"
+        "$mainMod SHIFT, RETURN, exec, ghostty"
         "$mainMod, M, exec, hyprlock" # Lock Screen
         "$mainMod, F, exec, firefox"
         "$mainMod, D, exec, rofi -show || (pkill rofi && rofi -show)" # Open Rofi Menu
