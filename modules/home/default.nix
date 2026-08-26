@@ -8,7 +8,7 @@
     ./rofi.nix
     ./tmux.nix
     ./waybar/waybar.nix
-    ./yazi.nix
+    ./yazi/yazi.nix
   ];
 
   /**
