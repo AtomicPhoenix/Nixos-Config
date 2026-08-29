@@ -73,7 +73,6 @@
       duo-manage-monitors
       post_rebuild
       wireshark
-      pkgs-unstable.ciscoPacketTracer9
     ];
 
   users.users.ai = {
