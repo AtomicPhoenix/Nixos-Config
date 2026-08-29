@@ -34,8 +34,8 @@
   }
   {
     name = "Obsidian";
-    "match:initial_class" = "obsidian";
-    workspace = "14";
+    "match:initial_class" = "md.Obsidian";
+    workspace = "14 silent";
     monitor = 0;
   }
   {

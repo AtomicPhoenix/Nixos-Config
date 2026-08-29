@@ -171,7 +171,7 @@
         "$mainMod CTRL, S, exec, (hyprctl dispatch focuswindow class:spotify  | grep ok)  || (notify-send -i $spotifyIcon  'Starting Spotify'  && spotify  $useWayland)"
         "$mainMod CTRL, D, exec, (hyprctl dispatch focuswindow class:discord  | grep ok)  || (notify-send -i $discordIcon  'Starting Discord'  && discord  $useWayland)"
         "$mainMod CTRL, C, exec, (hyprctl dispatch focuswindow class:ClickUp  | grep ok)  || (notify-send -i $clickUpIcon  'Starting Clickup'  && clickup  $useWayland)"
-        "$mainMod CTRL, O, exec, (hyprctl dispatch focuswindow class:obsidian | grep ok)  || (notify-send -i $obsidianIcon 'Starting Obsidian' && obsidian $useWayland)"
+        "$mainMod CTRL, O, exec, (hyprctl dispatch focuswindow class:md.Obsidian | grep ok)  || (notify-send -i $obsidianIcon 'Starting Obsidian' && obsidian $useWayland)"
 
         # Screenshots
         "$mainMod SHIFT, S, exec, grim -g \"$(slurp -d -w 0)\" - | wl-copy; notify-send 'Image copied to clipboard'"
