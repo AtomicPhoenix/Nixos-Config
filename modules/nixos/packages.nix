@@ -123,6 +123,7 @@
       bc
 
       # Misc. Apps
+      networkmanagerapplet
       spotify
       obsidian
       # clickup

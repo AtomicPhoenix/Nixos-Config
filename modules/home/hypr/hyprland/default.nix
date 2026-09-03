@@ -24,6 +24,7 @@
         "import_env tmux"
         "import_env system"
         "mako &"
+        "nm-applet &"
         "waybar"
         "hyprpaper"
         "hypridle"
