@@ -10,6 +10,7 @@
       font-family = "FiraCode Nerd Font Mono";
       font-size = 12;
       copy-on-select = true;
+      confirm-close-surface = false;
     };
   };
 }
