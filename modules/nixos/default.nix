@@ -12,6 +12,7 @@
     ./packages.nix
     ./terminal.nix
     ./time-and-locale.nix
+    ./virtualization.nix
   ];
 
   # Defines the user account.
