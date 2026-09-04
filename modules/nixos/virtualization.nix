@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   programs.dconf.enable = true;
+  programs.virt-manager.enable = true;
 
   users.users.ai.extraGroups = ["libvirtd"];
 
