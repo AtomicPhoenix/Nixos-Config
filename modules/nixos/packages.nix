@@ -106,6 +106,7 @@
       cemu
       dolphin-emu
       protonup-ng
+      prismlauncher
 
       # SSH protocol implementation
       openssh
