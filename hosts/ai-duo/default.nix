@@ -47,6 +47,8 @@
     };
   };
 
+  nixpkgs.overlays = [inputs.nix-matlab.overlay];
+
   environment.systemPackages = let
     get-kbd-connected = pkgs.writeShellApplication {
       name = "get-kbd-connected";
@@ -73,6 +75,8 @@
       duo-manage-monitors
       post_rebuild
       wireshark
+
+      matlab
     ];
 
   users.users.ai = {

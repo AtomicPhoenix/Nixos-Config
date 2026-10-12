@@ -14,6 +14,11 @@
     # Hyrland
     hyprland.url = "github:hyprwm/Hyprland";
 
+    nix-matlab = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "gitlab:doronbehar/nix-matlab";
+    };
+
     # Neovim configuration system for Nix
     nvf = {
       url = "github:notashelf/nvf";
@@ -38,6 +43,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    nix-matlab,
     nvf,
     sops-nix,
     ...
